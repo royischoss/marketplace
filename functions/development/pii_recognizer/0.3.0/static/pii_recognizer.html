@@ -128,24 +128,24 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">annotated_text.util</span> <span class="k">as</span> <span class="nn">at_util</span>
-<span class="kn">import</span> <span class="nn">mlrun</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">presidio_analyzer</span> <span class="k">as</span> <span class="nn">pa</span>
-<span class="kn">import</span> <span class="nn">presidio_anonymizer</span> <span class="k">as</span> <span class="nn">pre_anoymizer</span>
-<span class="kn">from</span> <span class="nn">presidio_anonymizer.entities</span> <span class="kn">import</span> <span class="n">OperatorConfig</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">annotated_text.util</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">at_util</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">presidio_analyzer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">presidio_anonymizer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pre_anoymizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">presidio_anonymizer.entities</span><span class="w"> </span><span class="kn">import</span> <span class="n">OperatorConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">flair</span> <span class="k">as</span> <span class="nn">fl</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">flair</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fl</span>
 <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Flair is not installed"</span><span class="p">)</span>
 
@@ -160,14 +160,14 @@
 
 
 <span class="c1"># Add the constant classes of Models and Entities to govern the whole package</span>
-<div class="viewcode-block" id="Models"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.Models">[docs]</a><span class="k">class</span> <span class="nc">Models</span><span class="p">:</span>
+<div class="viewcode-block" id="Models"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.Models">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Models</span><span class="p">:</span>
     <span class="n">WHOLE</span> <span class="o">=</span> <span class="s2">"whole"</span>
     <span class="n">PATTERN</span> <span class="o">=</span> <span class="s2">"pattern"</span>
     <span class="n">SPACY</span> <span class="o">=</span> <span class="s2">"spacy"</span>
     <span class="n">FLAIR</span> <span class="o">=</span> <span class="s2">"flair"</span></div>
 
 
-<div class="viewcode-block" id="Entities"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.Entities">[docs]</a><span class="k">class</span> <span class="nc">Entities</span><span class="p">:</span>
+<div class="viewcode-block" id="Entities"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.Entities">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Entities</span><span class="p">:</span>
     <span class="n">CREDIT_CARD</span> <span class="o">=</span> <span class="s2">"CREDIT_CARD"</span>
     <span class="n">SSN</span> <span class="o">=</span> <span class="s2">"SSN"</span>
     <span class="n">PHONE</span> <span class="o">=</span> <span class="s2">"PHONE"</span>
@@ -194,7 +194,7 @@
     <span class="n">SWIFT_CODE</span> <span class="o">=</span> <span class="s2">"SWIFT_CODE"</span></div>
 
 
-<div class="viewcode-block" id="PatternRecognizerFactory"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.PatternRecognizerFactory">[docs]</a><span class="k">class</span> <span class="nc">PatternRecognizerFactory</span><span class="p">:</span>
+<div class="viewcode-block" id="PatternRecognizerFactory"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.PatternRecognizerFactory">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">PatternRecognizerFactory</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Factory for creating pattern recognizers, it can be extended in the future to</span>
 <span class="sd">    add more regex pattern for different entities. For the pattern recognizer to work,</span>
@@ -210,7 +210,7 @@
 
     <span class="c1"># create a list of pattern recognizers</span>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_create_pattern_recognizer</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_pattern_recognizer</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        For each entity, create a list of patterns to recognize it</span>
 
@@ -227,7 +227,7 @@
         <span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="CustomSpacyRecognizer"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.CustomSpacyRecognizer">[docs]</a><span class="k">class</span> <span class="nc">CustomSpacyRecognizer</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">LocalRecognizer</span><span class="p">):</span>
+<div class="viewcode-block" id="CustomSpacyRecognizer"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.CustomSpacyRecognizer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CustomSpacyRecognizer</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">LocalRecognizer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Custom Spacy Recognizer from Presidio Analyzer trained on Privy data.</span>
 <span class="sd">    The privy data is generated using this https://github.com/pixie-io/pixie/tree/main/src/datagen/pii/privy</span>
@@ -275,7 +275,7 @@
         <span class="s2">"DATE_TIME"</span><span class="p">:</span> <span class="s2">"DATE_TIME"</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">supported_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">,</span>
         <span class="n">supported_entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -307,7 +307,7 @@
 
     <span class="c1"># get the presidio explanation for the result</span>
 
-    <span class="k">def</span> <span class="nf">_build_spacy_explanation</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_spacy_explanation</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">original_score</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">explanation</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalysisExplanation</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -326,7 +326,7 @@
         <span class="k">return</span> <span class="n">explanation</span>
 
     <span class="c1"># main method for the recognizer</span>
-<div class="viewcode-block" id="CustomSpacyRecognizer.analyze"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.CustomSpacyRecognizer.analyze">[docs]</a>    <span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">nlp_artifacts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa D102</span>
+<div class="viewcode-block" id="CustomSpacyRecognizer.analyze"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.CustomSpacyRecognizer.analyze">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">nlp_artifacts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa D102</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Analyze text using Spacy.</span>
 
@@ -373,7 +373,7 @@
         <span class="k">return</span> <span class="n">results</span></div>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">__check_label</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__check_label</span><span class="p">(</span>
         <span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">check_label_groups</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Set</span><span class="p">,</span> <span class="n">Set</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -391,7 +391,7 @@
 
 
 <span class="c1"># Class to use Flair with Presidio as an external recognizer.</span>
-<div class="viewcode-block" id="FlairRecognizer"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.FlairRecognizer">[docs]</a><span class="k">class</span> <span class="nc">FlairRecognizer</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">EntityRecognizer</span><span class="p">):</span>
+<div class="viewcode-block" id="FlairRecognizer"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.FlairRecognizer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FlairRecognizer</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">EntityRecognizer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Wrapper for a flair model, if needed to be used within Presidio Analyzer.</span>
 <span class="sd">    This is to make sure the recognizer can be registered with Presidio registry.</span>
@@ -464,7 +464,7 @@
         <span class="s2">"US_BANK_NUMBER"</span><span class="p">:</span> <span class="s2">"US_BANK_NUMBER"</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">supported_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">,</span>
         <span class="n">supported_entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -494,7 +494,7 @@
         <span class="p">)</span>
 
     <span class="c1"># main method for the recognizer</span>
-<div class="viewcode-block" id="FlairRecognizer.analyze"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.FlairRecognizer.analyze">[docs]</a>    <span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span>
+<div class="viewcode-block" id="FlairRecognizer.analyze"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.FlairRecognizer.analyze">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
@@ -547,7 +547,7 @@
 
         <span class="k">return</span> <span class="n">results</span></div>
 
-    <span class="k">def</span> <span class="nf">_convert_to_recognizer_result</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_convert_to_recognizer_result</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">:</span> <span class="n">fl</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Span</span><span class="p">,</span> <span class="n">explanation</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -576,7 +576,7 @@
 
         <span class="k">return</span> <span class="n">flair_results</span>
 
-    <span class="k">def</span> <span class="nf">_build_flair_explanation</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_flair_explanation</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">original_score</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">explanation</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalysisExplanation</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -598,7 +598,7 @@
 
     <span class="c1"># sanity check of the entity and label before recognition</span>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">__check_label</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__check_label</span><span class="p">(</span>
         <span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">check_label_groups</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Set</span><span class="p">,</span> <span class="n">Set</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">any</span><span class="p">(</span>
@@ -607,7 +607,7 @@
 
 
 <span class="c1"># get the analyzer engine based on the model</span>
-<span class="k">def</span> <span class="nf">_get_analyzer_engine</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_analyzer_engine</span><span class="p">(</span>
     <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalyzerEngine</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -678,7 +678,7 @@
     <span class="k">return</span> <span class="n">analyzer</span>
 
 
-<span class="k">def</span> <span class="nf">_get_anonymizer_engine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pre_anoymizer</span><span class="o">.</span><span class="n">AnonymizerEngine</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_anonymizer_engine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pre_anoymizer</span><span class="o">.</span><span class="n">AnonymizerEngine</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return AnonymizerEngine.</span>
 
@@ -687,7 +687,7 @@
     <span class="k">return</span> <span class="n">pre_anoymizer</span><span class="o">.</span><span class="n">AnonymizerEngine</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">_anonymize</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_anonymize</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">analyze_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span>
     <span class="n">entity_operator_map</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -755,7 +755,7 @@
     <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">anonymized_sentences</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_get_tokens</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_tokens</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">analyze_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -800,7 +800,7 @@
     <span class="k">return</span> <span class="n">tokens</span>
 
 
-<span class="k">def</span> <span class="nf">_annotate</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_annotate</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">st_analyze_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -816,7 +816,7 @@
     <span class="k">return</span> <span class="n">_get_tokens</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">st_analyze_results</span><span class="p">,</span> <span class="n">is_full_html</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_process</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_process</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">model</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalyzerEngine</span><span class="p">,</span>
     <span class="n">score_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -858,7 +858,7 @@
     <span class="k">return</span> <span class="n">anonymized_text</span><span class="p">,</span> <span class="n">results</span>
 
 
-<span class="k">def</span> <span class="nf">_get_single_html</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_single_html</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -882,7 +882,7 @@
     <span class="k">return</span> <span class="n">html_str</span>
 
 
-<span class="k">def</span> <span class="nf">_get_single_json</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full_report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_single_json</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full_report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Generate the json for a single txt file.</span>
 
@@ -904,7 +904,7 @@
     <span class="k">return</span> <span class="n">stats</span>
 
 
-<span class="k">def</span> <span class="nf">_get_all_html</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_all_html</span><span class="p">(</span>
     <span class="n">txt_content</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="n">res_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="n">is_full_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -932,7 +932,7 @@
     <span class="k">return</span> <span class="n">html_res</span>
 
 
-<span class="k">def</span> <span class="nf">_get_all_rpt</span><span class="p">(</span><span class="n">res_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">is_full_report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_all_rpt</span><span class="p">(</span><span class="n">res_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">is_full_report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Generate the stats report for all txt files.</span>
 
@@ -958,7 +958,7 @@
     <span class="k">return</span> <span class="n">stats_dict</span>
 
 
-<div class="viewcode-block" id="recognize_pii"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.recognize_pii">[docs]</a><span class="k">def</span> <span class="nf">recognize_pii</span><span class="p">(</span>
+<div class="viewcode-block" id="recognize_pii"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.recognize_pii">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">recognize_pii</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">input_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">html_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>

@@ -114,20 +114,20 @@
 <main id="main-content" role="main">
 <div>
 <h1>Source code for mlflow_utils.mlflow_utils</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">zipfile</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
-<span class="kn">import</span> <span class="nn">mlflow</span>
-<span class="kn">from</span> <span class="nn">mlrun.serving.v2_serving</span> <span class="kn">import</span> <span class="n">V2ModelServer</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.serving.v2_serving</span><span class="w"> </span><span class="kn">import</span> <span class="n">V2ModelServer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 
-<div class="viewcode-block" id="MLFlowModelServer"><a class="viewcode-back" href="documentation.html#mlflow_utils.mlflow_utils.MLFlowModelServer">[docs]</a><span class="k">class</span> <span class="nc">MLFlowModelServer</span><span class="p">(</span><span class="n">V2ModelServer</span><span class="p">):</span>
+<div class="viewcode-block" id="MLFlowModelServer"><a class="viewcode-back" href="documentation.html#mlflow_utils.mlflow_utils.MLFlowModelServer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">MLFlowModelServer</span><span class="p">(</span><span class="n">V2ModelServer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    MLFlow tracker Model serving class, inheriting the V2ModelServer class for being initialized automatically by the model</span>
 <span class="sd">    server and be able to run locally as part of a nuclio serverless function, or as part of a real-time pipeline.</span>
 <span class="sd">    """</span>
 
-<div class="viewcode-block" id="MLFlowModelServer.load"><a class="viewcode-back" href="documentation.html#mlflow_utils.mlflow_utils.MLFlowModelServer.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MLFlowModelServer.load"><a class="viewcode-back" href="documentation.html#mlflow_utils.mlflow_utils.MLFlowModelServer.load">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        loads a model that was logged by the MLFlow tracker model</span>
 <span class="sd">        """</span>
@@ -140,7 +140,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path_unzip</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MLFlowModelServer.predict"><a class="viewcode-back" href="documentation.html#mlflow_utils.mlflow_utils.MLFlowModelServer.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="MLFlowModelServer.predict"><a class="viewcode-back" href="documentation.html#mlflow_utils.mlflow_utils.MLFlowModelServer.predict">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Infer the inputs through the model. The inferred data will</span>
 <span class="sd">        be read from the "inputs" key of the request.</span>

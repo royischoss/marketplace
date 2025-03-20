@@ -191,8 +191,8 @@
 <h2>Export function yaml<a class="headerlink" href="#export-function-yaml" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">code_to_function</span>
-<span class="kn">from</span> <span class="nn">mlrun.runtimes</span> <span class="kn">import</span> <span class="n">RemoteRuntime</span>
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">code_to_function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.runtimes</span><span class="w"> </span><span class="kn">import</span> <span class="n">RemoteRuntime</span>
 
 <span class="n">fn</span><span class="p">:</span> <span class="n">RemoteRuntime</span> <span class="o">=</span> <span class="n">code_to_function</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">"model-monitoring-batch"</span><span class="p">,</span>
@@ -212,9 +212,9 @@
 <h2>Deploy Batch Processing<a class="headerlink" href="#deploy-batch-processing" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">import_function</span>
-<span class="kn">from</span> <span class="nn">mlrun.platforms</span> <span class="kn">import</span> <span class="n">mount_v3io</span>
-<span class="kn">from</span> <span class="nn">mlrun.runtimes</span> <span class="kn">import</span> <span class="n">KubejobRuntime</span>
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.platforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">mount_v3io</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.runtimes</span><span class="w"> </span><span class="kn">import</span> <span class="n">KubejobRuntime</span>
 
 
 <span class="c1"># Set project name</span>

@@ -127,33 +127,33 @@
 <span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">operator</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">wraps</span>
-<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torchaudio</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torchaudio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">AutomaticSpeechRecognitionPipeline</span><span class="p">,</span>
     <span class="n">AutoModelForCausalLM</span><span class="p">,</span>
     <span class="n">pipeline</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">transformers.utils</span> <span class="kn">import</span> <span class="n">is_flash_attn_2_available</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_flash_attn_2_available</span>
 
 
-<div class="viewcode-block" id="BaseTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask">[docs]</a><span class="k">class</span> <span class="nc">BaseTask</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BaseTask</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A task to write the transcription to file.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">transcription_output</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">text_file</span><span class="p">:</span> <span class="n">Path</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -171,7 +171,7 @@
         <span class="c1"># Prepare the error variable:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="BaseTask.do_task"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.do_task">[docs]</a>    <span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseTask.do_task"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.do_task">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Try to perform the task storing an error if occurred.</span>
 <span class="sd">        """</span>
@@ -183,7 +183,7 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseTask.is_failed"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.is_failed">[docs]</a>    <span class="k">def</span> <span class="nf">is_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseTask.is_failed"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.is_failed">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check if the task failed.</span>
 
@@ -191,7 +191,7 @@
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="BaseTask.get_result"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.get_result">[docs]</a>    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="BaseTask.get_result"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.get_result">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the result of the task. If the task failed, the error will be returned, otherwise, the result will be the</span>
 <span class="sd">        text file name.</span>
@@ -202,7 +202,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="o">.</span><span class="n">name</span></div>
 
-<div class="viewcode-block" id="BaseTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<div class="viewcode-block" id="BaseTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.to_tuple">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
 
@@ -214,7 +214,7 @@
             <span class="s2">"text_file"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="p">,</span>
         <span class="p">}</span></div>
 
-    <span class="k">def</span> <span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Perform the task - write the transcription to the stored file path.</span>
 <span class="sd">        """</span>
@@ -235,12 +235,12 @@
             <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">[</span><span class="s2">"text"</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="SpeechDiarizationTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask">[docs]</a><span class="k">class</span> <span class="nc">SpeechDiarizationTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
+<div class="viewcode-block" id="SpeechDiarizationTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A task to write the transcription to file with respect to a given speech diarization.</span>
 <span class="sd">    """</span>
 
-    <span class="k">class</span> <span class="nc">_DiarizationSegment</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">_DiarizationSegment</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        A speech diarization segment.</span>
 <span class="sd">        """</span>
@@ -249,7 +249,7 @@
         <span class="n">end</span><span class="p">:</span> <span class="nb">float</span>
         <span class="n">speaker</span><span class="p">:</span> <span class="nb">str</span>
 
-    <span class="k">class</span> <span class="nc">_WordTimestamp</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">_WordTimestamp</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        A word with its start and end timestamps.</span>
 <span class="sd">        """</span>
@@ -258,7 +258,7 @@
         <span class="n">end</span><span class="p">:</span> <span class="nb">float</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
         <span class="n">transcription_output</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
@@ -282,7 +282,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SpeechDiarizationTask</span><span class="o">.</span><span class="n">_DiarizationSegment</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">=</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="SpeechDiarizationTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<div class="viewcode-block" id="SpeechDiarizationTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask.to_tuple">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
 
@@ -294,7 +294,7 @@
             <span class="s2">"speech_diarization"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span><span class="p">,</span>
         <span class="p">}</span></div>
 
-    <span class="k">def</span> <span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Perform the task - write the transcription to the stored file path with respect to the given speech diarization.</span>
 <span class="sd">        """</span>
@@ -340,7 +340,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="o">=</span> <span class="n">text</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_do_task</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_get_next_segment</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_next_segment</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">word</span><span class="p">:</span> <span class="n">_WordTimestamp</span><span class="p">,</span>
     <span class="p">):</span>
@@ -425,12 +425,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">=</span> <span class="n">closest_segment_index</span></div>
 
 
-<div class="viewcode-block" id="SpeechDiarizationPerChannelTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask">[docs]</a><span class="k">class</span> <span class="nc">SpeechDiarizationPerChannelTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationPerChannelTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A task to write the transcription to file with respect to a given speech diarization per channel.</span>
 <span class="sd">    """</span>
 
-    <span class="k">class</span> <span class="nc">_WordTimestamp</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">_WordTimestamp</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        A word with its start and end timestamps and speaker label (channel the word was taken from).</span>
 <span class="sd">        """</span>
@@ -440,7 +440,7 @@
         <span class="n">speaker</span><span class="p">:</span> <span class="nb">str</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">text_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">text_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the task.</span>
 
@@ -453,7 +453,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output_channels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">transcription_output_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transcription_output_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the transcription output channels.</span>
 
@@ -461,7 +461,7 @@
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output_channels</span>
 
-<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.do_task"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.do_task">[docs]</a>    <span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.do_task"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.do_task">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Try to perform the task storing an error if occurred.</span>
 <span class="sd">        """</span>
@@ -471,7 +471,7 @@
                 <span class="k">return</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do_task</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.to_tuple">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
 
@@ -481,7 +481,7 @@
         <span class="n">task_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"transcription_output"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">task_class</span><span class="p">,</span> <span class="n">task_kwargs</span></div>
 
-    <span class="k">def</span> <span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Perform the task - write the transcription to the stored file path with respect to the given speech diarization</span>
 <span class="sd">        per channel.</span>
@@ -521,14 +521,14 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_do_task</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="BatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor">[docs]</a><span class="k">class</span> <span class="nc">BatchProcessor</span><span class="p">:</span>
+<div class="viewcode-block" id="BatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BatchProcessor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A batch processor to process batches of transcriptions. The batch processor is creating tasks and is aimed to be</span>
 <span class="sd">    working along the transcriber. It can be used with multiprocessing queue or run the tasks directly using the</span>
 <span class="sd">    associated methods.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">output_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">output_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the batch processor.</span>
 
@@ -544,7 +544,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="BatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.process_batch">[docs]</a>    <span class="k">def</span> <span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
+<div class="viewcode-block" id="BatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.process_batch">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
 <span class="sd">        processor.</span>
@@ -566,7 +566,7 @@
             <span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="BatchProcessor.get_tasks"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_tasks">[docs]</a>    <span class="k">def</span> <span class="nf">get_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">]:</span>
+<div class="viewcode-block" id="BatchProcessor.get_tasks"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_tasks">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the tasks to perform.</span>
 
@@ -576,7 +576,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">return</span> <span class="n">tasks</span></div>
 
-<div class="viewcode-block" id="BatchProcessor.do_tasks"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.do_tasks">[docs]</a>    <span class="k">def</span> <span class="nf">do_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BatchProcessor.do_tasks"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.do_tasks">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Perform the tasks. Should be used if no multiprocessing queue is given to a transcriber.</span>
 <span class="sd">        """</span>
@@ -584,7 +584,7 @@
             <span class="n">task</span><span class="o">.</span><span class="n">do_task</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">task</span><span class="o">.</span><span class="n">is_failed</span><span class="p">(),</span> <span class="n">task</span><span class="o">.</span><span class="n">get_result</span><span class="p">()))</span></div>
 
-<div class="viewcode-block" id="BatchProcessor.get_results"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<div class="viewcode-block" id="BatchProcessor.get_results"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_results">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the results of the tasks. The stored results are then cleared.</span>
 
@@ -594,7 +594,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">return</span> <span class="n">results</span></div>
 
-    <span class="k">def</span> <span class="nf">_get_current_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_current_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the current files to process.</span>
 
@@ -612,14 +612,14 @@
         <span class="k">return</span> <span class="n">current_files</span></div>
 
 
-<div class="viewcode-block" id="SpeechDiarizationBatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor">[docs]</a><span class="k">class</span> <span class="nc">SpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
+<div class="viewcode-block" id="SpeechDiarizationBatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A batch processor to process batches of transcriptions with respect to a given speech diarization. The batch</span>
 <span class="sd">    processor is creating tasks and is aimed to be working along the transcriber. It can be used with multiprocessing</span>
 <span class="sd">    queue or run the tasks directly using the associated methods.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">output_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">speech_diarization</span><span class="p">:</span> <span class="nb">dict</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -633,7 +633,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span> <span class="o">=</span> <span class="n">speech_diarization</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span> <span class="o">=</span> <span class="n">audio_files</span>
 
-<div class="viewcode-block" id="SpeechDiarizationBatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor.process_batch">[docs]</a>    <span class="k">def</span> <span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
+<div class="viewcode-block" id="SpeechDiarizationBatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor.process_batch">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
 <span class="sd">        processor.</span>
@@ -657,14 +657,14 @@
         <span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor">[docs]</a><span class="k">class</span> <span class="nc">PerChannelSpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
+<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">PerChannelSpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A batch processor to process batches of transcriptions per channel. The batch processor is creating tasks with the</span>
 <span class="sd">    selected amount of channels given and is aimed to be working along the transcriber. It can be used with</span>
 <span class="sd">    multiprocessing queue or run the tasks directly using the associated methods.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
         <span class="n">output_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
@@ -688,7 +688,7 @@
         <span class="c1"># Prepare a channel buffer to store the channels until the current task created is fully covered:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="p">:</span> <span class="n">SpeechDiarizationPerChannelTask</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor.process_batch">[docs]</a>    <span class="k">def</span> <span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
+<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor.process_batch">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
 <span class="sd">        processor.</span>
@@ -724,14 +724,14 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span> <span class="o">=</span> <span class="kc">None</span></div></div>
 
 
-<div class="viewcode-block" id="Transcriber"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber">[docs]</a><span class="k">class</span> <span class="nc">Transcriber</span><span class="p">:</span>
+<div class="viewcode-block" id="Transcriber"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Transcriber</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A transcription wrapper for the Huggingface's ASR pipeline -</span>
 <span class="sd">    https://huggingface.co/transformers/main_classes/pipelines.html#transformers.AutomaticSpeechRecognitionPipeline to</span>
 <span class="sd">    use with OpenAI's Whisper models - https://huggingface.co/openai.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -808,7 +808,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_pipeline</span><span class="p">:</span> <span class="n">AutomaticSpeechRecognitionPipeline</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_generate_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="Transcriber.load"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Transcriber.load"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.load">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Load the transcriber. Must be called before transcribing.</span>
 <span class="sd">        """</span>
@@ -895,7 +895,7 @@
             <span class="n">assistant_model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_generate_kwargs</span><span class="p">[</span><span class="s2">"assistant_model"</span><span class="p">]</span> <span class="o">=</span> <span class="n">assistant_model</span></div>
 
-<div class="viewcode-block" id="Transcriber.transcribe"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.transcribe">[docs]</a>    <span class="k">def</span> <span class="nf">transcribe</span><span class="p">(</span>
+<div class="viewcode-block" id="Transcriber.transcribe"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.transcribe">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">transcribe</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
         <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -917,7 +917,7 @@
 <span class="sd">        """</span>
         <span class="c1"># Wrap the audio files with a function to iterate over them via a generator (save memory and runtime with</span>
         <span class="c1"># Huggingface's pipelines as they preload each input while inference is running):</span>
-        <span class="k">def</span> <span class="nf">audio_iterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">audio_iterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_per_channel_transcription</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">audio_file</span> <span class="ow">in</span> <span class="n">audio_files</span><span class="p">:</span>
                     <span class="n">audio</span><span class="p">,</span> <span class="n">sampling_rate</span> <span class="o">=</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">audio_file</span><span class="p">))</span>
@@ -929,7 +929,7 @@
                     <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span><span class="n">audio_file</span><span class="p">)</span>
 
         <span class="c1"># Create a batch iterator:</span>
-        <span class="k">def</span> <span class="nf">batch_iterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">batch_iterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
             <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">audio</span> <span class="ow">in</span> <span class="n">audio_iterator</span><span class="p">():</span>
                 <span class="n">batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span>
@@ -997,7 +997,7 @@
 <span class="n">_MULTIPROCESSING_STOP_MARK</span> <span class="o">=</span> <span class="s2">"STOP"</span>
 
 
-<span class="k">def</span> <span class="nf">_multiprocessing_process_batches</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_multiprocessing_process_batches</span><span class="p">(</span>
     <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span><span class="p">,</span>
     <span class="n">batches_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span>
     <span class="n">tasks_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span>
@@ -1034,7 +1034,7 @@
         <span class="n">tasks_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_multiprocessing_complete_tasks</span><span class="p">(</span><span class="n">tasks_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">results_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_multiprocessing_complete_tasks</span><span class="p">(</span><span class="n">tasks_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">results_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Complete the tasks in the given queue and put the results in the given results queue. The function will stop when</span>
 <span class="sd">    the given tasks queue will receive the stop mark. It is aimed to be used with multiprocessing as a process.</span>
@@ -1070,7 +1070,7 @@
 <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.open_mpi_handler">[docs]</a><span class="k">def</span> <span class="nf">open_mpi_handler</span><span class="p">(</span>
+<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.open_mpi_handler">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">open_mpi_handler</span><span class="p">(</span>
     <span class="n">worker_inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
     <span class="k">global</span> <span class="n">_LOGGER</span>
@@ -1082,12 +1082,12 @@
     <span class="k">if</span> <span class="n">context</span><span class="p">:</span>
         <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
 
-    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">comm</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">handler</span>
 
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="c1"># Get the open mpi environment properties:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
             <span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
@@ -1182,17 +1182,17 @@
     <span class="k">return</span> <span class="n">decorator</span></div>
 
 
-<span class="k">def</span> <span class="nf">_check_mlrun_and_open_mpi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">"mlrun.MLClientCtx"</span><span class="p">,</span> <span class="s2">"mpi4py.MPI.Intracomm"</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_mlrun_and_open_mpi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">"mlrun.MLClientCtx"</span><span class="p">,</span> <span class="s2">"mpi4py.MPI.Intracomm"</span><span class="p">]:</span>
     <span class="n">is_mpi</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">mlrun</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 
         <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"mlrun"</span><span class="p">)</span>
         <span class="n">is_mpi</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">,</span> <span class="s2">"job"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"mpijob"</span>
 
         <span class="k">if</span> <span class="n">is_mpi</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">mpi4py</span><span class="w"> </span><span class="kn">import</span> <span class="n">MPI</span>
 
                 <span class="k">return</span> <span class="n">context</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
             <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">mpi4py_not_found</span><span class="p">:</span>
@@ -1210,7 +1210,7 @@
 
 
 <div class="viewcode-block" id="transcribe"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.transcribe">[docs]</a><span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
-<span class="k">def</span> <span class="nf">transcribe</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">transcribe</span><span class="p">(</span>
     <span class="c1"># Input / Output kwargs:</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span>
     <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1429,7 +1429,7 @@
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_directory</span><span class="p">),</span> <span class="n">successes</span><span class="p">,</span> <span class="n">errors</span></div>
 
 
-<span class="k">def</span> <span class="nf">_get_audio_files</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_audio_files</span><span class="p">(</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -1465,7 +1465,7 @@
     <span class="k">return</span> <span class="n">audio_files</span>
 
 
-<span class="k">def</span> <span class="nf">_run</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_run</span><span class="p">(</span>
     <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span><span class="p">,</span>
     <span class="n">transcriber</span><span class="p">:</span> <span class="n">Transcriber</span><span class="p">,</span>
@@ -1499,7 +1499,7 @@
     <span class="k">return</span> <span class="n">batch_processor</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">_parallel_run</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_parallel_run</span><span class="p">(</span>
     <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span><span class="p">,</span>

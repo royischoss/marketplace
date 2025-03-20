@@ -128,18 +128,18 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">#</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 
-<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 
 
-<span class="k">class</span> <span class="nc">_ToONNXConversions</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ToONNXConversions</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    An ONNX conversion functions library class.</span>
 <span class="sd">    """</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">tf_keras_to_onnx</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tf_keras_to_onnx</span><span class="p">(</span>
         <span class="n">model_handler</span><span class="p">,</span>
         <span class="n">onnx_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">optimize_model</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -161,8 +161,8 @@
 <span class="sd">                                to None.</span>
 <span class="sd">        """</span>
         <span class="c1"># Import the framework and handler:</span>
-        <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-        <span class="kn">from</span> <span class="nn">mlrun.frameworks.tf_keras</span> <span class="kn">import</span> <span class="n">TFKerasUtils</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.tf_keras</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFKerasUtils</span>
 
         <span class="c1"># Check the given 'input_signature' parameter:</span>
         <span class="k">if</span> <span class="n">input_signature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -194,7 +194,7 @@
         <span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">pytorch_to_onnx</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pytorch_to_onnx</span><span class="p">(</span>
         <span class="n">model_handler</span><span class="p">,</span>
         <span class="n">onnx_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">optimize_model</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -237,8 +237,8 @@
 <span class="sd">                                    Defaulted to True. Will be ignored if 'dynamic_axes' is provided.</span>
 <span class="sd">        """</span>
         <span class="c1"># Import the framework and handler:</span>
-        <span class="kn">import</span> <span class="nn">torch</span>
-        <span class="kn">from</span> <span class="nn">mlrun.frameworks.pytorch</span> <span class="kn">import</span> <span class="n">PyTorchUtils</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyTorchUtils</span>
 
         <span class="c1"># Parse the 'input_signature' parameter:</span>
         <span class="k">if</span> <span class="n">input_signature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -273,7 +273,7 @@
 <span class="p">}</span>  <span class="c1"># type: Dict[str, Callable]</span>
 
 
-<div class="viewcode-block" id="to_onnx"><a class="viewcode-back" href="documentation.html#onnx_utils.onnx_utils.to_onnx">[docs]</a><span class="k">def</span> <span class="nf">to_onnx</span><span class="p">(</span>
+<div class="viewcode-block" id="to_onnx"><a class="viewcode-back" href="documentation.html#onnx_utils.onnx_utils.to_onnx">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">to_onnx</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">onnx_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -292,7 +292,7 @@
 <span class="sd">    :param framework_kwargs: Additional arguments each framework may require in order to convert to ONNX. To get the doc</span>
 <span class="sd">                             string of the desired framework onnx conversion function, pass "help".</span>
 <span class="sd">    """</span>
-    <span class="kn">from</span> <span class="nn">mlrun.frameworks.auto_mlrun.auto_mlrun</span> <span class="kn">import</span> <span class="n">AutoMLRun</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.auto_mlrun.auto_mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMLRun</span>
 
     <span class="c1"># Get a model handler of the required framework:</span>
     <span class="n">model_handler</span> <span class="o">=</span> <span class="n">AutoMLRun</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
@@ -332,7 +332,7 @@
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="optimize"><a class="viewcode-back" href="documentation.html#onnx_utils.onnx_utils.optimize">[docs]</a><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span>
+<div class="viewcode-block" id="optimize"><a class="viewcode-back" href="documentation.html#onnx_utils.onnx_utils.optimize">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">optimize</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">optimizations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -351,8 +351,8 @@
 <span class="sd">                                 Defaulted to None.</span>
 <span class="sd">    """</span>
     <span class="c1"># Import the model handler:</span>
-    <span class="kn">import</span> <span class="nn">onnxoptimizer</span>
-    <span class="kn">from</span> <span class="nn">mlrun.frameworks.onnx</span> <span class="kn">import</span> <span class="n">ONNXModelHandler</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">onnxoptimizer</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.onnx</span><span class="w"> </span><span class="kn">import</span> <span class="n">ONNXModelHandler</span>
 
     <span class="c1"># Check if needed to print the available optimizations ("help" is passed):</span>
     <span class="k">if</span> <span class="n">optimizations</span> <span class="o">==</span> <span class="s2">"help"</span><span class="p">:</span>

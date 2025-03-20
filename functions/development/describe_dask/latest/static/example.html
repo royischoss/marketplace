@@ -187,7 +187,7 @@
 <div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 </pre></div>
 </div>
 </div>
@@ -214,7 +214,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -222,22 +222,22 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 
-<span class="kn">import</span> <span class="nn">dask</span>
-<span class="kn">import</span> <span class="nn">dask.dataframe</span> <span class="k">as</span> <span class="nn">dd</span>
-<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dask</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dask.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask.distributed</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
 
-<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">PlotArtifact</span><span class="p">,</span> <span class="n">TableArtifact</span>
-<span class="kn">from</span> <span class="nn">mlrun.mlutils.plots</span> <span class="kn">import</span> <span class="n">gcf_clear</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.artifacts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotArtifact</span><span class="p">,</span> <span class="n">TableArtifact</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.mlutils.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">gcf_clear</span>
 
-<span class="kn">from</span> <span class="nn">yellowbrick</span> <span class="kn">import</span> <span class="n">ClassBalance</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">yellowbrick</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassBalance</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 </pre></div>
 </div>
 </div>
@@ -246,7 +246,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">"</span><span class="si">%.2f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span>
     <span class="n">context</span><span class="p">,</span>
     <span class="n">dask_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"dask_key"</span><span class="p">,</span>
     <span class="n">dataset</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>

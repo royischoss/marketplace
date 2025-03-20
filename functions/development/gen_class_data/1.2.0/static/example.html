@@ -211,23 +211,23 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: ignore</span>
-<span class="kn">import</span> <span class="nn">nuclio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nuclio</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">pyarrow</span> <span class="k">as</span> <span class="nn">pa</span>
-<span class="kn">import</span> <span class="nn">pyarrow.parquet</span> <span class="k">as</span> <span class="nn">pq</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow.parquet</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pq</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
 
-<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.execution</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLClientCtx</span>
 
-<span class="k">def</span> <span class="nf">gen_class_data</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gen_class_data</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">m_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -292,8 +292,8 @@
 <h2>save<a class="headerlink" href="#save" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">code_to_function</span>
-<span class="kn">from</span> <span class="nn">mlrun.platforms.other</span> <span class="kn">import</span> <span class="n">auto_mount</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">code_to_function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.platforms.other</span><span class="w"> </span><span class="kn">import</span> <span class="n">auto_mount</span>
 
 <span class="n">gpus</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -328,7 +328,7 @@
 <h2>test function<a class="headerlink" href="#test-function" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">NewTask</span><span class="p">,</span> <span class="n">mlconf</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewTask</span><span class="p">,</span> <span class="n">mlconf</span>
 
 <span class="n">task_params</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"name"</span><span class="p">:</span>        <span class="s2">"tasks generate classification data"</span><span class="p">,</span> 
@@ -348,7 +348,7 @@
 <h2>local<a class="headerlink" href="#local" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">run_local</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_local</span>
 <span class="n">run_local</span><span class="p">(</span><span class="n">NewTask</span><span class="p">(</span><span class="o">**</span><span class="n">task_params</span><span class="p">),</span> <span class="n">handler</span><span class="o">=</span><span class="n">gen_class_data</span><span class="p">)</span>
 </pre></div>
 </div>

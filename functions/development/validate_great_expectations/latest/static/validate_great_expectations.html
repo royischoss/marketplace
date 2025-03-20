@@ -114,21 +114,21 @@
 <main id="main-content" role="main">
 <div>
 <h1>Source code for validate_great_expectations.validate_great_expectations</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 
-<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 
-<span class="kn">from</span> <span class="nn">great_expectations.core.batch</span> <span class="kn">import</span> <span class="n">RuntimeBatchRequest</span>
-<span class="kn">from</span> <span class="nn">great_expectations.data_context</span> <span class="kn">import</span> <span class="n">BaseDataContext</span>
-<span class="kn">from</span> <span class="nn">great_expectations.data_context.types.base</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">great_expectations.core.batch</span><span class="w"> </span><span class="kn">import</span> <span class="n">RuntimeBatchRequest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">great_expectations.data_context</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseDataContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">great_expectations.data_context.types.base</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DataContextConfig</span><span class="p">,</span>
     <span class="n">FilesystemStoreBackendDefaults</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">great_expectations.checkpoint.types.checkpoint_result</span> <span class="kn">import</span> <span class="n">CheckpointResult</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">great_expectations.checkpoint.types.checkpoint_result</span><span class="w"> </span><span class="kn">import</span> <span class="n">CheckpointResult</span>
 
 
-<div class="viewcode-block" id="get_default_datasource_config"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_default_datasource_config">[docs]</a><span class="k">def</span> <span class="nf">get_default_datasource_config</span><span class="p">(</span>
+<div class="viewcode-block" id="get_default_datasource_config"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_default_datasource_config">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_default_datasource_config</span><span class="p">(</span>
     <span class="n">datasource_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_connector_name</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -159,7 +159,7 @@
     <span class="k">return</span> <span class="n">default_datasource_config</span></div>
 
 
-<div class="viewcode-block" id="get_default_checkpoint_config"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_default_checkpoint_config">[docs]</a><span class="k">def</span> <span class="nf">get_default_checkpoint_config</span><span class="p">(</span><span class="n">checkpoint_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="get_default_checkpoint_config"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_default_checkpoint_config">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_default_checkpoint_config</span><span class="p">(</span><span class="n">checkpoint_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convenience function to get the default checkpoint config for</span>
 <span class="sd">    use in validating expectations.</span>
@@ -176,7 +176,7 @@
     <span class="p">}</span></div>
 
 
-<div class="viewcode-block" id="get_data_doc_path"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_data_doc_path">[docs]</a><span class="k">def</span> <span class="nf">get_data_doc_path</span><span class="p">(</span><span class="n">checkpoint_result</span><span class="p">:</span> <span class="n">CheckpointResult</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="get_data_doc_path"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_data_doc_path">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_data_doc_path</span><span class="p">(</span><span class="n">checkpoint_result</span><span class="p">:</span> <span class="n">CheckpointResult</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convenience function to get the path of the output</span>
 <span class="sd">    data doc from a checkpoint result.</span>
@@ -193,7 +193,7 @@
     <span class="k">return</span> <span class="n">data_doc_path</span></div>
 
 
-<div class="viewcode-block" id="validate_expectations"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.validate_expectations">[docs]</a><span class="k">def</span> <span class="nf">validate_expectations</span><span class="p">(</span>
+<div class="viewcode-block" id="validate_expectations"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.validate_expectations">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">validate_expectations</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span>
     <span class="n">expectation_suite_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>

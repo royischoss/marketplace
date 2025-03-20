@@ -128,31 +128,31 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">operator</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">wraps</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">transformers</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">transformers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
 <span class="c1"># Get the global logger:</span>
 <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">_check_mlrun_and_open_mpi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">"mlrun.MLClientCtx"</span><span class="p">,</span> <span class="s2">"mpi4py.MPI.Intracomm"</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_mlrun_and_open_mpi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">"mlrun.MLClientCtx"</span><span class="p">,</span> <span class="s2">"mpi4py.MPI.Intracomm"</span><span class="p">]:</span>
     <span class="n">is_mpi</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">mlrun</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 
         <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"mlrun"</span><span class="p">)</span>
         <span class="n">is_mpi</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">,</span> <span class="s2">"job"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"mpijob"</span>
 
         <span class="k">if</span> <span class="n">is_mpi</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">mpi4py</span><span class="w"> </span><span class="kn">import</span> <span class="n">MPI</span>
 
                 <span class="k">return</span> <span class="n">context</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
             <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">mpi4py_not_found</span><span class="p">:</span>
@@ -169,7 +169,7 @@
     <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#translate.translate.open_mpi_handler">[docs]</a><span class="k">def</span> <span class="nf">open_mpi_handler</span><span class="p">(</span>
+<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#translate.translate.open_mpi_handler">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">open_mpi_handler</span><span class="p">(</span>
     <span class="n">worker_inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
     <span class="k">global</span> <span class="n">_LOGGER</span>
@@ -181,12 +181,12 @@
     <span class="k">if</span> <span class="n">context</span><span class="p">:</span>
         <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
 
-    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">comm</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">handler</span>
 
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="c1"># Get the open mpi environment properties:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
             <span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
@@ -248,7 +248,7 @@
 
 
 <div class="viewcode-block" id="translate"><a class="viewcode-back" href="documentation.html#translate.translate.translate">[docs]</a><span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
-<span class="k">def</span> <span class="nf">translate</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">translate</span><span class="p">(</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -378,7 +378,7 @@
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_directory</span><span class="p">),</span> <span class="n">successes</span><span class="p">,</span> <span class="n">errors</span></div>
 
 
-<span class="k">def</span> <span class="nf">_get_text_files</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_text_files</span><span class="p">(</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]:</span>
     <span class="c1"># Check if the path is of a directory or a file:</span>
@@ -396,7 +396,7 @@
     <span class="k">return</span> <span class="n">text_files</span>
 
 
-<span class="k">def</span> <span class="nf">_get_translation_pipeline</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_translation_pipeline</span><span class="p">(</span>
     <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">source_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">target_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -439,13 +439,13 @@
                 <span class="sa">f</span><span class="s2">"or more language code might be with 3 letters and needs to be found online. "</span>
                 <span class="sa">f</span><span class="s2">"Remember, you can always choose a model directly from the Huggingface hub by using the `model_name` "</span>
                 <span class="sa">f</span><span class="s2">"parameter."</span>
-            <span class="p">)</span> <span class="kn">from</span> <span class="nn">load_exception</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">load_exception</span>
         <span class="k">raise</span> <span class="n">load_exception</span>
 
     <span class="k">return</span> <span class="n">translation_pipeline</span><span class="p">,</span> <span class="n">model_name</span>
 
 
-<span class="k">def</span> <span class="nf">_translate</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_translate</span><span class="p">(</span>
     <span class="n">text_file</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
     <span class="n">translation_pipeline</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">,</span>
     <span class="n">translation_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
@@ -492,7 +492,7 @@
     <span class="k">return</span> <span class="n">translated_text</span>
 
 
-<span class="k">def</span> <span class="nf">_save_to_file</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_save_to_file</span><span class="p">(</span>
     <span class="n">translation</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
     <span class="c1"># Prepare the file full path (checking for no duplications):</span>

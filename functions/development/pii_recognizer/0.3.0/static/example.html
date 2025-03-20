@@ -423,7 +423,7 @@ A dict of errors when processing the text files if any</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 <span class="n">artifact_path</span> <span class="o">=</span> <span class="s2">"./"</span>
 <span class="n">proj</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s2">"pii"</span><span class="p">,</span> <span class="s2">"./"</span><span class="p">)</span>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span>
@@ -664,8 +664,8 @@ function closePanel(el) {
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#get the mlrun context</span>
 <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="s1">'pii_ctx1'</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.auto</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt_file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
         <span class="n">tqdm</span><span class="p">(</span>
             <span class="nb">list</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">"./data/output1/"</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.txt"</span><span class="p">)),</span>
@@ -698,7 +698,7 @@ We look forward to creating unforgettable memories for you and your loved ones d
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#check the highlighted html </span>
 <span class="n">html_output</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_cached_artifact</span><span class="p">(</span><span class="s2">"highlighted"</span><span class="p">)</span>
 <span class="n">html_str</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">html_output</span><span class="o">.</span><span class="n">get_target_path</span><span class="p">())</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.core.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
 <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html_str</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -718,7 +718,7 @@ We look forward to creating unforgettable memories for you and your loved ones d
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#check the json report about the explanation.</span>
 <span class="n">rpt_output1</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_cached_artifact</span><span class="p">(</span><span class="s2">"rpt_json"</span><span class="p">)</span>
 <span class="n">rpt_str1</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">rpt_output1</span><span class="o">.</span><span class="n">get_target_path</span><span class="p">())</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">rpt_str1</span><span class="p">)</span>
  
 <span class="c1"># Pretty Print JSON</span>
@@ -964,7 +964,7 @@ We look forward to creating unforgettable memories for you and your loved ones d
         }
      </pre><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 <span class="n">artifact_path</span> <span class="o">=</span> <span class="s2">"./"</span>
 <span class="n">proj</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s2">"pii"</span><span class="p">,</span> <span class="s2">"./"</span><span class="p">)</span>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span>
@@ -1215,8 +1215,8 @@ function closePanel(el) {
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#get the mlrun context</span>
 <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="s1">'pii_ctx1'</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.auto</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt_file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
         <span class="n">tqdm</span><span class="p">(</span>
             <span class="nb">list</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">"./data/output2/"</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.txt"</span><span class="p">)),</span>
@@ -1249,7 +1249,7 @@ John smith's Company XYZ is 182838483, connect him with 😀😀😀😀😀😀
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#check the highlighted html </span>
 <span class="n">html_output</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_cached_artifact</span><span class="p">(</span><span class="s2">"highlighted"</span><span class="p">)</span>
 <span class="n">html_str</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">html_output</span><span class="o">.</span><span class="n">get_target_path</span><span class="p">())</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.core.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
 <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html_str</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1269,7 +1269,7 @@ We look forward to creating unforgettable memories for you and your loved ones d
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#check the json report about the explanation.</span>
 <span class="n">rpt_output1</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_cached_artifact</span><span class="p">(</span><span class="s2">"rpt_json"</span><span class="p">)</span>
 <span class="n">rpt_str1</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">rpt_output1</span><span class="o">.</span><span class="n">get_target_path</span><span class="p">())</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">rpt_str1</span><span class="p">)</span>
  
 <span class="c1"># Pretty Print JSON</span>
@@ -1511,7 +1511,7 @@ We look forward to creating unforgettable memories for you and your loved ones d
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 <span class="n">artifact_path</span> <span class="o">=</span> <span class="s2">"./"</span>
 <span class="n">proj</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s2">"pii"</span><span class="p">,</span> <span class="s2">"./"</span><span class="p">)</span>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span>
@@ -1764,8 +1764,8 @@ function closePanel(el) {
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#get the mlrun context</span>
 <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="s1">'pii_ctx'</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.auto</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 </pre></div>
 </div>
 </div>
@@ -1799,7 +1799,7 @@ John smith's Company XYZ is 182838483, connect him with 😀😀😀😀😀😀
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#check the highlighted html </span>
 <span class="n">html_output</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_cached_artifact</span><span class="p">(</span><span class="s2">"highlighted"</span><span class="p">)</span>
 <span class="n">html_str</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">html_output</span><span class="o">.</span><span class="n">get_target_path</span><span class="p">())</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.core.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
 <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html_str</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1814,7 +1814,7 @@ We are pleased to inform you that you have been selected as the winner of our ex
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#check the json report about the explanation.</span>
 <span class="n">rpt_output</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_cached_artifact</span><span class="p">(</span><span class="s2">"rpt_json"</span><span class="p">)</span>
 <span class="n">rpt_str</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">rpt_output</span><span class="o">.</span><span class="n">get_target_path</span><span class="p">())</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">rpt_str</span><span class="p">)</span>
  
 <span class="c1"># Pretty Print JSON</span>

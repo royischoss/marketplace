@@ -127,14 +127,14 @@
 <span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
-<span class="kn">import</span> <span class="nn">ast</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ast</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">tqdm</span>
-<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chat_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
 
 
-<span class="k">def</span> <span class="nf">_set_openai_secrets</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_set_openai_secrets</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="n">key</span> <span class="o">=</span> <span class="s2">"OPENAI_API_KEY"</span>
     <span class="n">base</span> <span class="o">=</span> <span class="s2">"OPENAI_API_BASE"</span>
     <span class="c1"># Check if the key is already in the environment variables:</span>
@@ -142,7 +142,7 @@
         <span class="k">return</span> <span class="kc">True</span>
     <span class="c1"># Check if mlrun is installed:</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">mlrun</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
     <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"One or more of the OpenAI required environment variables ('</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">', '</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">') are missing."</span>
@@ -172,7 +172,7 @@
     <span class="k">return</span> <span class="kc">True</span>
 
 
-<div class="viewcode-block" id="generate_data"><a class="viewcode-back" href="documentation.html#structured_data_generator.structured_data_generator.generate_data">[docs]</a><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span>
+<div class="viewcode-block" id="generate_data"><a class="viewcode-back" href="documentation.html#structured_data_generator.structured_data_generator.generate_data">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">generate_data</span><span class="p">(</span>
     <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
     <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
     <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"gpt-3.5-turbo"</span><span class="p">,</span>

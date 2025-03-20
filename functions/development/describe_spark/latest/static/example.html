@@ -230,7 +230,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: ignore</span>
-<span class="kn">import</span> <span class="nn">nuclio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nuclio</span>
 </pre></div>
 </div>
 </div>
@@ -251,18 +251,18 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
-<span class="kn">from</span> <span class="nn">mlrun.platforms.iguazio</span> <span class="kn">import</span> <span class="n">mount_v3io</span><span class="p">,</span> <span class="n">mount_v3iod</span>
-<span class="kn">from</span> <span class="nn">mlrun.datastore</span> <span class="kn">import</span> <span class="n">DataItem</span>
-<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.platforms.iguazio</span><span class="w"> </span><span class="kn">import</span> <span class="n">mount_v3io</span><span class="p">,</span> <span class="n">mount_v3iod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.datastore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataItem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.execution</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLClientCtx</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">run</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">subprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">run</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">LongType</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">LongType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
 </pre></div>
 </div>
 </div>
@@ -272,29 +272,29 @@
 <h1>Build Spark Describe Helper Functions<a class="headerlink" href="#build-spark-describe-helper-functions" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">base64</span> <span class="k">as</span> <span class="nn">b64</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">b64</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
-<span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">SparkDataFrame</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="p">(</span><span class="nb">abs</span> <span class="k">as</span> <span class="n">df_abs</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">countDistinct</span><span class="p">,</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pkg_resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">resource_filename</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">six</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">SparkDataFrame</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="nb">abs</span> <span class="k">as</span> <span class="n">df_abs</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">countDistinct</span><span class="p">,</span>
                                    <span class="nb">max</span> <span class="k">as</span> <span class="n">df_max</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="nb">min</span> <span class="k">as</span> <span class="n">df_min</span><span class="p">,</span>
                                    <span class="nb">sum</span> <span class="k">as</span> <span class="n">df_sum</span><span class="p">,</span> <span class="n">when</span>
                                    <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">variance</span><span class="p">,</span> <span class="n">stddev</span><span class="p">,</span> <span class="n">kurtosis</span><span class="p">,</span> <span class="n">skewness</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance</span><span class="p">,</span> <span class="n">stddev</span><span class="p">,</span> <span class="n">kurtosis</span><span class="p">,</span> <span class="n">skewness</span>
 
 
-<span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">corr_reject</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">corr_reject</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">SparkDataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"df must be of type pyspark.sql.DataFrame"</span><span class="p">)</span>
 
@@ -309,19 +309,19 @@
         <span class="k">pass</span>
 
     <span class="c1"># Function to "pretty name" floats:</span>
-    <span class="k">def</span> <span class="nf">pretty_name</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pretty_name</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">*=</span> <span class="mi">100</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
             <span class="k">return</span> <span class="s1">'</span><span class="si">%.0f%%</span><span class="s1">'</span> <span class="o">%</span> <span class="n">x</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">'</span><span class="si">%.1f%%</span><span class="s1">'</span> <span class="o">%</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="nf">corr_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">corr_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
         <span class="n">combinations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span><span class="n">columns</span><span class="p">))</span>
 
-        <span class="k">def</span> <span class="nf">separate</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">separate</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">n</span><span class="p">):</span>
                 <span class="k">yield</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="p">]</span>
 
@@ -338,9 +338,9 @@
         
         <span class="k">return</span> <span class="n">df_pandas</span>
 
-    <span class="k">def</span> <span class="nf">create_hist_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">minim</span><span class="p">,</span> <span class="n">maxim</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_hist_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">minim</span><span class="p">,</span> <span class="n">maxim</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 
-        <span class="k">def</span> <span class="nf">create_all_conditions</span><span class="p">(</span><span class="n">current_col</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">left_edges</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">create_all_conditions</span><span class="p">(</span><span class="n">current_col</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">left_edges</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Recursive function that exploits the</span>
 <span class="sd">            ability to call the Spark SQL Column method</span>
@@ -392,7 +392,7 @@
         <span class="k">return</span> <span class="n">bin_data</span>
 
 
-    <span class="k">def</span> <span class="nf">describe_integer_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">current_result</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_integer_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">current_result</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
         
         <span class="n">stats_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">),</span>
                                                        <span class="n">df_min</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"min"</span><span class="p">),</span>
@@ -428,7 +428,7 @@
 
         <span class="k">return</span> <span class="n">stats</span>
 
-    <span class="k">def</span> <span class="nf">describe_float_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">current_result</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_float_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">current_result</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
         <span class="n">stats_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">),</span>
                                                        <span class="n">df_min</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"min"</span><span class="p">),</span>
                                                        <span class="n">df_max</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"max"</span><span class="p">),</span>
@@ -462,7 +462,7 @@
 
         <span class="k">return</span> <span class="n">stats</span>
 
-    <span class="k">def</span> <span class="nf">describe_date_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_date_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
         <span class="n">stats_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">df_min</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"min"</span><span class="p">),</span>
                                                    <span class="n">df_max</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"max"</span><span class="p">)</span>
                                                   <span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
@@ -479,7 +479,7 @@
         <span class="n">stats</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"DATE"</span>
         <span class="k">return</span> <span class="n">stats</span>
 
-    <span class="k">def</span> <span class="nf">guess_json_type</span><span class="p">(</span><span class="n">string_value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">guess_json_type</span><span class="p">(</span><span class="n">string_value</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">string_value</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
@@ -487,7 +487,7 @@
 
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">describe_categorical_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_categorical_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
         <span class="n">value_counts</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
                         <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
                         <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)))</span>
@@ -526,21 +526,21 @@
         <span class="n">stats</span><span class="p">[</span><span class="s2">"unparsed_json_types"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unparsed_valid_jsons</span>
         <span class="k">return</span> <span class="n">stats</span>
 
-    <span class="k">def</span> <span class="nf">describe_constant_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_constant_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
         <span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">'CONST'</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'type'</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>
         <span class="n">stats</span><span class="p">[</span><span class="s2">"value_counts"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
                                  <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
                                  <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">stats</span>
 
-    <span class="k">def</span> <span class="nf">describe_unique_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_unique_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
         <span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">'UNIQUE'</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'type'</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>
         <span class="n">stats</span><span class="p">[</span><span class="s2">"value_counts"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
                                  <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
                                  <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">stats</span>
 
-    <span class="k">def</span> <span class="nf">describe_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">lookup_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">lookup_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">column_type</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="p">(</span><span class="s2">"array"</span> <span class="ow">in</span> <span class="n">column_type</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">"stuct"</span> <span class="ow">in</span> <span class="n">column_type</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">"map"</span> <span class="ow">in</span> <span class="n">column_type</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Column </span><span class="si">{c}</span><span class="s2"> is of type </span><span class="si">{t}</span><span class="s2"> and cannot be analyzed"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">column_type</span><span class="p">))</span>
@@ -660,29 +660,29 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">abs</span> <span class="k">as</span> <span class="n">absou</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="nb">abs</span> <span class="k">as</span> <span class="n">absou</span>
 
 <span class="n">SKEWNESS_CUTOFF</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">DEFAULT_FLOAT_FORMATTER</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'spark_df_profiling.__default_float_formatter'</span>
 
 
-<span class="k">def</span> <span class="nf">gradient_format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">limit1</span><span class="p">,</span> <span class="n">limit2</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">LerpColour</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gradient_format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">limit1</span><span class="p">,</span> <span class="n">limit2</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">LerpColour</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">c1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">c2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">c1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">t</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">c1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">c2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">c1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">t</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">c1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">c2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">c1</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">LerpColour</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="p">(</span><span class="n">value</span><span class="o">-</span><span class="n">limit1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">limit2</span><span class="o">-</span><span class="n">limit1</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">fmt_color</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="s2">"rgb</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span>
 
 
-<span class="k">def</span> <span class="nf">fmt_color</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fmt_color</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
     <span class="k">return</span><span class="p">(</span><span class="sa">u</span><span class="s1">'&lt;span style="color:</span><span class="si">{color}</span><span class="s1">"&gt;</span><span class="si">{text}</span><span class="s1">&lt;/span&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
 
 
-<span class="k">def</span> <span class="nf">fmt_class</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fmt_class</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
     <span class="k">return</span><span class="p">(</span><span class="sa">u</span><span class="s1">'&lt;span class="</span><span class="si">{cls}</span><span class="s1">"&gt;</span><span class="si">{text}</span><span class="s1">&lt;/span&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
 
 
-<span class="k">def</span> <span class="nf">fmt_bytesize</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">'B'</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fmt_bytesize</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">'B'</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span><span class="s1">'Ki'</span><span class="p">,</span><span class="s1">'Mi'</span><span class="p">,</span><span class="s1">'Gi'</span><span class="p">,</span><span class="s1">'Ti'</span><span class="p">,</span><span class="s1">'Pi'</span><span class="p">,</span><span class="s1">'Ei'</span><span class="p">,</span><span class="s1">'Zi'</span><span class="p">]:</span>
         <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">*-</span><span class="mi">1</span>
@@ -692,10 +692,10 @@
     <span class="k">return</span> <span class="s2">"</span><span class="si">%.1f</span><span class="s2"> </span><span class="si">%s%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s1">'Yi'</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">fmt_percent</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fmt_percent</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="k">return</span>  <span class="s2">"</span><span class="si">{:2.1f}</span><span class="s2">%"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">fmt_varname</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fmt_varname</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="k">return</span> <span class="sa">u</span><span class="s1">'&lt;code&gt;</span><span class="si">{0}</span><span class="s1">&lt;/code&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
 
@@ -712,13 +712,13 @@
         <span class="sa">u</span><span class="s1">'unparsed_json_types'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">v</span><span class="p">])</span>
         <span class="p">}</span>
 
-<span class="k">def</span> <span class="nf">fmt_row_severity</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fmt_row_severity</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">&lt;=</span> <span class="mf">0.01</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">"ignore"</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">"alert"</span>
 
-<span class="k">def</span> <span class="nf">fmt_skewness</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fmt_skewness</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span><span class="o">&lt;-</span><span class="n">SKEWNESS_CUTOFF</span> <span class="ow">or</span> <span class="n">v</span><span class="o">&gt;</span> <span class="n">SKEWNESS_CUTOFF</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">"alert"</span>
     <span class="k">else</span><span class="p">:</span>
@@ -742,7 +742,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">([</span><span class="s2">"/bin/bash"</span><span class="p">,</span> <span class="s2">"/etc/config/v3io/v3io-spark-operator.sh"</span><span class="p">])</span>
 
-<span class="k">def</span> <span class="nf">describe_spark</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span> 
+<span class="k">def</span><span class="w"> </span><span class="nf">describe_spark</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span> 
                    <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
                    <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
                    <span class="n">describe_extended</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

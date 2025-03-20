@@ -268,7 +268,7 @@
 <p>This notebook shows how to create an email and send it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nuclio</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nuclio</span>
 </pre></div>
 </div>
 </div>
@@ -284,18 +284,18 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.execution</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 
 <span class="c1"># Import the email modules we'll need</span>
-<span class="kn">import</span> <span class="nn">smtplib</span>
-<span class="kn">from</span> <span class="nn">email.message</span> <span class="kn">import</span> <span class="n">EmailMessage</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">smtplib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">email.message</span><span class="w"> </span><span class="kn">import</span> <span class="n">EmailMessage</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="c1"># For guessing MIME type based on file name extension</span>
-<span class="kn">import</span> <span class="nn">mimetypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mimetypes</span>
 
-<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">send_email</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -377,8 +377,8 @@
 <h2>MLRun conf<a class="headerlink" href="#mlrun-conf" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">mlconf</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">mlconf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="c1">#artifact_path = mlconf.artifact_path or os.path.abspath('jobs')</span>
 <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'jobs'</span><span class="p">)</span>
@@ -394,7 +394,7 @@
 <h2>Save function<a class="headerlink" href="#save-function" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">code_to_function</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">code_to_function</span>
 
 <span class="c1"># create job function object from notebook code</span>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">code_to_function</span><span class="p">(</span><span class="s2">"send_email"</span><span class="p">)</span>
@@ -415,8 +415,8 @@
 <p>First, configure MLRun. Define project parameters that will be used for testing the function</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">getenv</span>
-<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">new_project</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">getenv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">new_project</span>
 
 <span class="n">project_name</span> <span class="o">=</span> <span class="s1">'-'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">'email-sending'</span><span class="p">,</span> <span class="n">getenv</span><span class="p">(</span><span class="s1">'V3IO_USERNAME'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]))</span>
 <span class="n">project_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'conf'</span><span class="p">)</span>
@@ -429,7 +429,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">run_local</span><span class="p">,</span> <span class="n">NewTask</span><span class="p">,</span> <span class="n">import_function</span><span class="p">,</span> <span class="n">mount_v3io</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_local</span><span class="p">,</span> <span class="n">NewTask</span><span class="p">,</span> <span class="n">import_function</span><span class="p">,</span> <span class="n">mount_v3io</span>
 
 <span class="c1"># Target location for storing pipeline artifacts</span>
 <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'jobs'</span><span class="p">)</span>
@@ -449,13 +449,13 @@
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.execution</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="c1"># Ingest a data set into the platform</span>
-<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> 
+<span class="k">def</span><span class="w"> </span><span class="nf">get_data</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> 
              <span class="n">source_url</span><span class="p">,</span> 
              <span class="nb">format</span><span class="o">=</span><span class="s1">'csv'</span><span class="p">):</span>
 

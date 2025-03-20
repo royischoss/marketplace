@@ -129,25 +129,25 @@
 <span class="c1"># limitations under the License.</span>
 <span class="c1">#</span>
 
-<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
-<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
 
-<span class="kn">import</span> <span class="nn">mlrun.serving</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun.serving</span>
 
 <span class="n">PACKAGE_MODULE</span> <span class="o">=</span> <span class="s2">"transformers"</span>
 <span class="n">SERIALIZABLE_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="HuggingFaceModelServer"><a class="viewcode-back" href="documentation.html#hugging_face_serving.hugging_face_serving.HuggingFaceModelServer">[docs]</a><span class="k">class</span> <span class="nc">HuggingFaceModelServer</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">serving</span><span class="o">.</span><span class="n">V2ModelServer</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="HuggingFaceModelServer"><a class="viewcode-back" href="documentation.html#hugging_face_serving.hugging_face_serving.HuggingFaceModelServer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">HuggingFaceModelServer</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">serving</span><span class="o">.</span><span class="n">V2ModelServer</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Hugging Face Model serving class, inheriting the V2ModelServer class for being initialized automatically by the</span>
 <span class="sd">    model server and be able to run locally as part of a nuclio serverless function, or as part of a real-time pipeline.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -199,7 +199,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">framework</span> <span class="o">=</span> <span class="n">framework</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pipe</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="HuggingFaceModelServer.load"><a class="viewcode-back" href="documentation.html#hugging_face_serving.hugging_face_serving.HuggingFaceModelServer.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="HuggingFaceModelServer.load"><a class="viewcode-back" href="documentation.html#hugging_face_serving.hugging_face_serving.HuggingFaceModelServer.load">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""load and initialize the model and/or other elements"""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_class</span><span class="p">:</span>
             <span class="n">model_object</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">import_module</span><span class="p">(</span><span class="n">PACKAGE_MODULE</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_class</span><span class="p">)</span>
@@ -216,7 +216,7 @@
             <span class="n">framework</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="HuggingFaceModelServer.predict"><a class="viewcode-back" href="documentation.html#hugging_face_serving.hugging_face_serving.HuggingFaceModelServer.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<div class="viewcode-block" id="HuggingFaceModelServer.predict"><a class="viewcode-back" href="documentation.html#hugging_face_serving.hugging_face_serving.HuggingFaceModelServer.predict">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Generate model predictions from sample."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pipe</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Please use `.load()`"</span><span class="p">)</span>

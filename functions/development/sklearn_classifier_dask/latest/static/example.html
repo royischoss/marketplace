@@ -234,7 +234,7 @@
 <p>Run any scikit-learn compatible classifier or list of classifiers</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 </pre></div>
 </div>
 </div>
@@ -261,36 +261,36 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">joblib</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">cloudpickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cloudpickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
 
-<span class="kn">from</span> <span class="nn">dask</span> <span class="kn">import</span> <span class="n">dataframe</span> <span class="k">as</span> <span class="n">dd</span>
-<span class="kn">from</span> <span class="nn">dask</span> <span class="kn">import</span> <span class="n">array</span> <span class="k">as</span> <span class="n">da</span>
-<span class="kn">from</span> <span class="nn">dask.delayed</span> <span class="kn">import</span> <span class="n">delayed</span>
-<span class="kn">from</span> <span class="nn">dask_ml</span> <span class="kn">import</span> <span class="n">model_selection</span>
-<span class="kn">from</span> <span class="nn">dask_ml</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">from</span> <span class="nn">dask_ml.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataframe</span> <span class="k">as</span> <span class="n">dd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask</span><span class="w"> </span><span class="kn">import</span> <span class="n">array</span> <span class="k">as</span> <span class="n">da</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask.delayed</span><span class="w"> </span><span class="kn">import</span> <span class="n">delayed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask_ml</span><span class="w"> </span><span class="kn">import</span> <span class="n">model_selection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask_ml</span><span class="w"> </span><span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask_ml.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">LabelEncoder</span>
 
-<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">PlotArtifact</span>
-<span class="kn">from</span> <span class="nn">mlrun.mlutils.models</span> <span class="kn">import</span> <span class="n">gen_sklearn_model</span>
-<span class="kn">from</span> <span class="nn">mlrun.utils.helpers</span> <span class="kn">import</span> <span class="n">create_class</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.artifacts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotArtifact</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.mlutils.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_sklearn_model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.utils.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_class</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">yellowbrick.classifier</span> <span class="kn">import</span> <span class="n">ROCAUC</span><span class="p">,</span> <span class="n">ClassificationReport</span><span class="p">,</span> <span class="n">ConfusionMatrix</span>
-<span class="kn">from</span> <span class="nn">yellowbrick.model_selection</span> <span class="kn">import</span> <span class="n">FeatureImportances</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">yellowbrick.classifier</span><span class="w"> </span><span class="kn">import</span> <span class="n">ROCAUC</span><span class="p">,</span> <span class="n">ClassificationReport</span><span class="p">,</span> <span class="n">ConfusionMatrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">yellowbrick.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureImportances</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">context</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_model</span><span class="p">(</span><span class="n">context</span><span class="p">,</span>
                 <span class="n">dataset</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span>
                 <span class="n">model_pkg_class</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="n">label_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"label"</span><span class="p">,</span>
@@ -486,7 +486,7 @@
 <h2>Save and Config<a class="headerlink" href="#save-and-config" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">artifact_path</span><span class="o">=</span><span class="s1">'./'</span><span class="p">)</span>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span><span class="s1">'sklearn-classifier-dask'</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">'job'</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="s1">'train_model'</span><span class="p">,</span> 
                             <span class="n">description</span><span class="o">=</span><span class="s2">"train any classifier using scikit-learn's API over Dask"</span><span class="p">,</span> 

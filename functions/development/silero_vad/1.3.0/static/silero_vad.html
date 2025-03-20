@@ -127,23 +127,23 @@
 <span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">FunctionType</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">FunctionType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torchaudio</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torchaudio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
 
-<div class="viewcode-block" id="BaseTask"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.BaseTask">[docs]</a><span class="k">class</span> <span class="nc">BaseTask</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseTask"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.BaseTask">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BaseTask</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A base class for a task to complete after VAD.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the base task.</span>
 
@@ -156,7 +156,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">audio_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">audio_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the audio file of the task.</span>
 
@@ -164,7 +164,7 @@
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span>
 
-<div class="viewcode-block" id="BaseTask.do_task"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.BaseTask.do_task">[docs]</a>    <span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span>
+<div class="viewcode-block" id="BaseTask.do_task"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.BaseTask.do_task">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_task</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">speech_timestamps</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]]</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -174,7 +174,7 @@
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="n">speech_timestamps</span></div>
 
-<div class="viewcode-block" id="BaseTask.get_result"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.BaseTask.get_result">[docs]</a>    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<div class="viewcode-block" id="BaseTask.get_result"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.BaseTask.get_result">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the result of the task. A tuple of the audio file name and the result.</span>
 
@@ -182,7 +182,7 @@
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span></div>
 
-<div class="viewcode-block" id="BaseTask.to_tuple"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.BaseTask.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<div class="viewcode-block" id="BaseTask.to_tuple"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.BaseTask.to_tuple">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
 
@@ -191,12 +191,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="p">{</span><span class="s2">"audio_file"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="p">}</span></div></div>
 
 
-<div class="viewcode-block" id="SpeechDiarizationTask"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.SpeechDiarizationTask">[docs]</a><span class="k">class</span> <span class="nc">SpeechDiarizationTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
+<div class="viewcode-block" id="SpeechDiarizationTask"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.SpeechDiarizationTask">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A speech diarization task. The task will diarize the VAD speech timestamps into speakers.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">speaker_labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">speaker_labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the speech diarization task.</span>
 
@@ -207,7 +207,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">audio_file</span><span class="o">=</span><span class="n">audio_file</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_speaker_labels</span> <span class="o">=</span> <span class="n">speaker_labels</span>
 
-<div class="viewcode-block" id="SpeechDiarizationTask.do_task"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.SpeechDiarizationTask.do_task">[docs]</a>    <span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speech_timestamps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]):</span>
+<div class="viewcode-block" id="SpeechDiarizationTask.do_task"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.SpeechDiarizationTask.do_task">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speech_timestamps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Do the task on the given speech timestamps. The task will diarize the VAD speech timestamps into speakers.</span>
 
@@ -229,7 +229,7 @@
         <span class="n">speech_diarization</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="n">speech_diarization</span></div>
 
-<div class="viewcode-block" id="SpeechDiarizationTask.to_tuple"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.SpeechDiarizationTask.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<div class="viewcode-block" id="SpeechDiarizationTask.to_tuple"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.SpeechDiarizationTask.to_tuple">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
 
@@ -239,7 +239,7 @@
         <span class="k">return</span> <span class="n">task_class</span><span class="p">,</span> <span class="p">{</span><span class="o">**</span><span class="n">task_kwargs</span><span class="p">,</span> <span class="s2">"speaker_labels"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speaker_labels</span><span class="p">}</span></div></div>
 
 
-<div class="viewcode-block" id="TaskCreator"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.TaskCreator">[docs]</a><span class="k">class</span> <span class="nc">TaskCreator</span><span class="p">:</span>
+<div class="viewcode-block" id="TaskCreator"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.TaskCreator">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">TaskCreator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A task creator to create different tasks to run after the VAD.</span>
 <span class="sd">    """</span>
@@ -250,7 +250,7 @@
         <span class="n">SpeechDiarizationTask</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="n">SpeechDiarizationTask</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">],</span> <span class="n">task_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">],</span> <span class="n">task_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the task creator.</span>
 <span class="sd">        :param task_type: The task type - a `BaseTask` subclass.</span>
@@ -259,7 +259,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_task_type</span> <span class="o">=</span> <span class="n">task_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_task_kwargs</span> <span class="o">=</span> <span class="n">task_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 
-<div class="viewcode-block" id="TaskCreator.create_task"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.TaskCreator.create_task">[docs]</a>    <span class="k">def</span> <span class="nf">create_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseTask</span><span class="p">:</span>
+<div class="viewcode-block" id="TaskCreator.create_task"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.TaskCreator.create_task">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseTask</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Create a task with the given audio file.</span>
 
@@ -270,7 +270,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task_type</span><span class="p">(</span><span class="n">audio_file</span><span class="o">=</span><span class="n">audio_file</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_task_kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaskCreator.from_tuple"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.TaskCreator.from_tuple">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_tuple</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">task_tuple</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">BaseTask</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_tuple</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">task_tuple</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">BaseTask</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Create a task from a tuple of the audio file name and the task kwargs.</span>
 
@@ -282,12 +282,12 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_MAP</span><span class="p">[</span><span class="n">task_class</span><span class="p">](</span><span class="o">**</span><span class="n">task_kwargs</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="VoiceActivityDetector"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.VoiceActivityDetector">[docs]</a><span class="k">class</span> <span class="nc">VoiceActivityDetector</span><span class="p">:</span>
+<div class="viewcode-block" id="VoiceActivityDetector"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.VoiceActivityDetector">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">VoiceActivityDetector</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A voice activity detection wrapper for the silero VAD model - https://github.com/snakers4/silero-vad.</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="c1"># Model loading kwargs:</span>
         <span class="n">use_onnx</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -347,7 +347,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_speech_timestamps</span><span class="p">:</span> <span class="n">FunctionType</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="VoiceActivityDetector.load"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.VoiceActivityDetector.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_reload</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="VoiceActivityDetector.load"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.VoiceActivityDetector.load">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_reload</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Load the VAD model.</span>
 
@@ -369,7 +369,7 @@
             <span class="n">_</span><span class="p">,</span>  <span class="c1"># collect_chunks</span>
         <span class="p">)</span> <span class="o">=</span> <span class="n">utils</span></div>
 
-<div class="viewcode-block" id="VoiceActivityDetector.detect_voice"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.VoiceActivityDetector.detect_voice">[docs]</a>    <span class="k">def</span> <span class="nf">detect_voice</span><span class="p">(</span>
+<div class="viewcode-block" id="VoiceActivityDetector.detect_voice"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.VoiceActivityDetector.detect_voice">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_voice</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]]:</span>
@@ -424,7 +424,7 @@
 
         <span class="k">return</span> <span class="n">speech_timestamps</span></div>
 
-    <span class="k">def</span> <span class="nf">_read_audio</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_audio</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
@@ -457,7 +457,7 @@
 <span class="n">_MULTIPROCESSING_STOP_MARK</span> <span class="o">=</span> <span class="s2">"STOP"</span>
 
 
-<span class="k">def</span> <span class="nf">_multiprocessing_complete_tasks</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_multiprocessing_complete_tasks</span><span class="p">(</span>
     <span class="n">vad_init_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">tasks_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">results_queue</span><span class="p">:</span> <span class="n">Queue</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -499,14 +499,14 @@
 
 <span class="c1"># Get the global logger:</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">mlrun</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
 
     <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="s2">"silero_vad"</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span>
 <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
     <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="detect_voice"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.detect_voice">[docs]</a><span class="k">def</span> <span class="nf">detect_voice</span><span class="p">(</span>
+<div class="viewcode-block" id="detect_voice"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.detect_voice">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">detect_voice</span><span class="p">(</span>
     <span class="c1"># Input kwargs:</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span>
     <span class="c1"># Model loading kwargs:</span>
@@ -630,7 +630,7 @@
     <span class="k">return</span> <span class="n">_process_results</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="diarize"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.diarize">[docs]</a><span class="k">def</span> <span class="nf">diarize</span><span class="p">(</span>
+<div class="viewcode-block" id="diarize"><a class="viewcode-back" href="documentation.html#silero_vad.silero_vad.diarize">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">diarize</span><span class="p">(</span>
     <span class="c1"># Input / Output kwargs:</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span>
     <span class="c1"># Model loading kwargs:</span>
@@ -755,7 +755,7 @@
     <span class="k">return</span> <span class="n">_process_results</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">_get_audio_files</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_audio_files</span><span class="p">(</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -792,7 +792,7 @@
     <span class="k">return</span> <span class="n">audio_files</span>
 
 
-<span class="k">def</span> <span class="nf">_run</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_run</span><span class="p">(</span>
     <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">vad_init_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
@@ -843,7 +843,7 @@
     <span class="k">return</span> <span class="n">results</span>
 
 
-<span class="k">def</span> <span class="nf">_parallel_run</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_parallel_run</span><span class="p">(</span>
     <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -937,7 +937,7 @@
     <span class="k">return</span> <span class="n">results</span>
 
 
-<span class="k">def</span> <span class="nf">_process_results</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_process_results</span><span class="p">(</span>
     <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]]],</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>

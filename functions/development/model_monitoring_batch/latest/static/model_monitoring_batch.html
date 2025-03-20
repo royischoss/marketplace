@@ -128,29 +128,29 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">#</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">v3io</span>
-<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">get_run_db</span>
-<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">store_manager</span>
-<span class="kn">from</span> <span class="nn">mlrun.data_types.infer</span> <span class="kn">import</span> <span class="n">DFDataInfer</span><span class="p">,</span> <span class="n">InferOptions</span>
-<span class="kn">from</span> <span class="nn">mlrun.run</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
-<span class="kn">from</span> <span class="nn">mlrun.utils</span> <span class="kn">import</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span>
-<span class="kn">from</span> <span class="nn">mlrun.utils.model_monitoring</span> <span class="kn">import</span> <span class="n">EndpointType</span><span class="p">,</span> <span class="n">parse_model_endpoint_store_prefix</span>
-<span class="kn">from</span> <span class="nn">mlrun.utils.v3io_clients</span> <span class="kn">import</span> <span class="n">get_v3io_client</span><span class="p">,</span> <span class="n">get_frames_client</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">KBinsDiscretizer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">v3io</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_run_db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">store_manager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.data_types.infer</span><span class="w"> </span><span class="kn">import</span> <span class="n">DFDataInfer</span><span class="p">,</span> <span class="n">InferOptions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.utils.model_monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">EndpointType</span><span class="p">,</span> <span class="n">parse_model_endpoint_store_prefix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.utils.v3io_clients</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_v3io_client</span><span class="p">,</span> <span class="n">get_frames_client</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">KBinsDiscretizer</span>
 
 <span class="n">TIME_FORMAT</span> <span class="o">=</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">%z"</span>
 
 
 <div class="viewcode-block" id="TotalVarianceDistance"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.TotalVarianceDistance">[docs]</a><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">TotalVarianceDistance</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TotalVarianceDistance</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Provides a symmetric drift distance between two periods t and u</span>
 <span class="sd">    Z - vector of random variables</span>
@@ -160,12 +160,12 @@
     <span class="n">distrib_t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">distrib_u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 
-<div class="viewcode-block" id="TotalVarianceDistance.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.TotalVarianceDistance.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="viewcode-block" id="TotalVarianceDistance.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.TotalVarianceDistance.compute">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span></div></div>
 
 
 <div class="viewcode-block" id="HellingerDistance"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.HellingerDistance">[docs]</a><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">HellingerDistance</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HellingerDistance</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Hellinger distance is an f divergence measure, similar to the Kullback-Leibler (KL) divergence.</span>
 <span class="sd">    However, unlike KL Divergence the Hellinger divergence is symmetric and bounded over a probability space.</span>
@@ -174,14 +174,14 @@
     <span class="n">distrib_t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">distrib_u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 
-<div class="viewcode-block" id="HellingerDistance.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.HellingerDistance.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="viewcode-block" id="HellingerDistance.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.HellingerDistance.compute">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
             <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="KullbackLeiblerDivergence"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.KullbackLeiblerDivergence">[docs]</a><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">KullbackLeiblerDivergence</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KullbackLeiblerDivergence</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    KL Divergence (or relative entropy) is a measure of how one probability distribution differs from another.</span>
 <span class="sd">    It is an asymmetric measure (thus it's not a metric) and it doesn't satisfy the triangle inequality.</span>
@@ -191,7 +191,7 @@
     <span class="n">distrib_t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">distrib_u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 
-<div class="viewcode-block" id="KullbackLeiblerDivergence.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.KullbackLeiblerDivergence.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kld_scaling</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="viewcode-block" id="KullbackLeiblerDivergence.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.KullbackLeiblerDivergence.compute">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kld_scaling</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="n">t_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
             <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
@@ -220,8 +220,8 @@
         <span class="k">return</span> <span class="n">result</span></div></div>
 
 
-<div class="viewcode-block" id="VirtualDrift"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift">[docs]</a><span class="k">class</span> <span class="nc">VirtualDrift</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="VirtualDrift"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">VirtualDrift</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">prediction_col</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">label_col</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -239,7 +239,7 @@
             <span class="s2">"kld"</span><span class="p">:</span> <span class="n">KullbackLeiblerDivergence</span><span class="p">,</span>
         <span class="p">}</span>
 
-<div class="viewcode-block" id="VirtualDrift.dict_to_histogram"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.dict_to_histogram">[docs]</a>    <span class="k">def</span> <span class="nf">dict_to_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">histogram_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="VirtualDrift.dict_to_histogram"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.dict_to_histogram">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">dict_to_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">histogram_dict</span><span class="p">):</span>
         <span class="n">histograms</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="n">histogram_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">histograms</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"hist"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -256,7 +256,7 @@
         <span class="n">histograms</span> <span class="o">=</span> <span class="n">histograms</span> <span class="o">/</span> <span class="n">histograms</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">histograms</span></div>
 
-<div class="viewcode-block" id="VirtualDrift.compute_metrics_over_df"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.compute_metrics_over_df">[docs]</a>    <span class="k">def</span> <span class="nf">compute_metrics_over_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_histogram</span><span class="p">,</span> <span class="n">latest_histogram</span><span class="p">):</span>
+<div class="viewcode-block" id="VirtualDrift.compute_metrics_over_df"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.compute_metrics_over_df">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compute_metrics_over_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_histogram</span><span class="p">,</span> <span class="n">latest_histogram</span><span class="p">):</span>
         <span class="n">drift_measures</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">metric_name</span><span class="p">,</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">drift_measures</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
@@ -267,7 +267,7 @@
             <span class="p">}</span>
         <span class="k">return</span> <span class="n">drift_measures</span></div>
 
-<div class="viewcode-block" id="VirtualDrift.compute_drift_from_histograms"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.compute_drift_from_histograms">[docs]</a>    <span class="k">def</span> <span class="nf">compute_drift_from_histograms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_stats</span><span class="p">,</span> <span class="n">current_stats</span><span class="p">):</span>
+<div class="viewcode-block" id="VirtualDrift.compute_drift_from_histograms"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.compute_drift_from_histograms">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compute_drift_from_histograms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_stats</span><span class="p">,</span> <span class="n">current_stats</span><span class="p">):</span>
         <span class="c1"># Process histogram dictionaries to Dataframe of the histograms</span>
         <span class="c1"># with Feature histogram as cols</span>
         <span class="n">base_histogram</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_to_histogram</span><span class="p">(</span><span class="n">feature_stats</span><span class="p">)</span>
@@ -343,8 +343,8 @@
         <span class="k">return</span> <span class="n">drift_result</span></div></div>
 
 
-<div class="viewcode-block" id="BatchProcessor"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor">[docs]</a><span class="k">class</span> <span class="nc">BatchProcessor</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="BatchProcessor"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BatchProcessor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
         <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -410,7 +410,7 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="BatchProcessor.post_init"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BatchProcessor.post_init"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.post_init">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v3io</span><span class="o">.</span><span class="n">create_stream</span><span class="p">(</span>
             <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_container</span><span class="p">,</span>
             <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_path</span><span class="p">,</span>
@@ -422,7 +422,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span> <span class="ow">and</span> <span class="s2">"ResourceInUse"</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)):</span>
             <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">([</span><span class="mi">409</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">403</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="BatchProcessor.run"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BatchProcessor.run"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.run">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">endpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">list_model_endpoints</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
@@ -548,7 +548,7 @@
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Exception for endpoint </span><span class="si">{</span><span class="n">endpoint_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="o">=</span> <span class="n">e</span></div>
 
-<div class="viewcode-block" id="BatchProcessor.check_for_drift"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.check_for_drift">[docs]</a>    <span class="k">def</span> <span class="nf">check_for_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drift_result</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">):</span>
+<div class="viewcode-block" id="BatchProcessor.check_for_drift"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.check_for_drift">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_for_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drift_result</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">):</span>
         <span class="n">tvd_mean</span> <span class="o">=</span> <span class="n">drift_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tvd_mean"</span><span class="p">)</span>
         <span class="n">hellinger_mean</span> <span class="o">=</span> <span class="n">drift_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hellinger_mean"</span><span class="p">)</span>
 
@@ -574,13 +574,13 @@
         <span class="k">return</span> <span class="n">drift_status</span><span class="p">,</span> <span class="n">drift_mean</span></div>
 
 <div class="viewcode-block" id="BatchProcessor.get_last_created_dir"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.get_last_created_dir">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_last_created_dir</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">endpoint_dir</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_last_created_dir</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">endpoint_dir</span><span class="p">):</span>
         <span class="n">dirs</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">endpoint_dir</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
         <span class="n">last_dir</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dirs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"="</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">last_dir</span></div></div>
 
 
-<div class="viewcode-block" id="handler"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.handler">[docs]</a><span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">):</span>
+<div class="viewcode-block" id="handler"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.handler">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">):</span>
     <span class="n">batch_processor</span> <span class="o">=</span> <span class="n">BatchProcessor</span><span class="p">(</span>
         <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
         <span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">project</span><span class="p">,</span>

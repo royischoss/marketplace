@@ -128,30 +128,30 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">#</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">mlrun</span>
-<span class="kn">import</span> <span class="nn">mlrun.datastore</span>
-<span class="kn">import</span> <span class="nn">mlrun.utils</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">feature_store</span> <span class="k">as</span> <span class="n">fs</span>
-<span class="kn">from</span> <span class="nn">mlrun.datastore</span> <span class="kn">import</span> <span class="n">DataItem</span>
-<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
-<span class="kn">from</span> <span class="nn">mlrun.frameworks.auto_mlrun</span> <span class="kn">import</span> <span class="n">AutoMLRun</span>
-<span class="kn">from</span> <span class="nn">mlrun.utils.helpers</span> <span class="kn">import</span> <span class="n">create_class</span><span class="p">,</span> <span class="n">create_function</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun.datastore</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun.utils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_store</span> <span class="k">as</span> <span class="n">fs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.datastore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataItem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.execution</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.auto_mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMLRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.utils.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_class</span><span class="p">,</span> <span class="n">create_function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="n">PathType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="KWArgsPrefixes"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.KWArgsPrefixes">[docs]</a><span class="k">class</span> <span class="nc">KWArgsPrefixes</span><span class="p">:</span>
+<div class="viewcode-block" id="KWArgsPrefixes"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.KWArgsPrefixes">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KWArgsPrefixes</span><span class="p">:</span>
     <span class="n">MODEL_CLASS</span> <span class="o">=</span> <span class="s2">"CLASS_"</span>
     <span class="n">FIT</span> <span class="o">=</span> <span class="s2">"FIT_"</span>
     <span class="n">TRAIN</span> <span class="o">=</span> <span class="s2">"TRAIN_"</span></div>
 
 
-<span class="k">def</span> <span class="nf">_get_sub_dict_by_prefix</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">prefix_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_sub_dict_by_prefix</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">prefix_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Collect all the keys from the given dict that starts with the given prefix and creates a new dictionary with these</span>
 <span class="sd">    keys.</span>
@@ -167,7 +167,7 @@
     <span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">_get_dataframe</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_dataframe</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
     <span class="n">label_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -234,7 +234,7 @@
     <span class="k">return</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">label_columns</span>
 
 
-<div class="viewcode-block" id="train"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.train">[docs]</a><span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
+<div class="viewcode-block" id="train"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.train">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
     <span class="n">model_class</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -386,7 +386,7 @@
     <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="evaluate"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.evaluate">[docs]</a><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span>
+<div class="viewcode-block" id="evaluate"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.evaluate">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">dataset</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span>
@@ -440,7 +440,7 @@
     <span class="n">model_handler</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="predict"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.predict">[docs]</a><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span>
+<div class="viewcode-block" id="predict"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.predict">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">dataset</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span>
