@@ -1,161 +1,159 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html data-content_root="./" lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>MLRun Auto-Trainer Tutorial</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
 <!-- Loaded before other Sphinx assets -->
-<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
-<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
-<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/css/custom.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css?v=8f2a1f02" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/css/custom.css?v=9816bda1" rel="stylesheet" type="text/css"/>
 <!-- Pre-loaded scripts that we'll load fully later -->
-<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
-<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-<script src="../../../_static/jquery.js"></script>
-<script src="../../../_static/underscore.js"></script>
-<script src="../../../_static/doctools.js"></script>
+<link as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+<script src="../../../_static/doctools.js?v=9bcbadda"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 <script>let toggleHintShow = 'Click to show';</script>
 <script>let toggleHintHide = 'Click to hide';</script>
 <script>let toggleOpenOnPrint = 'true';</script>
-<script src="../../../_static/togglebutton.js"></script>
-<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
 <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-<link href="genindex.html" rel="index" title="Index">
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'auto_trainer_example';</script>
+<link href="genindex.html" rel="index" title="Index"/>
 <link href="search.html" rel="search" title="Search"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="en" name="docsearch:language"/>
-<!-- Google Analytics -->
-</link></link></link></link></link></link></head>
-<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
-<!-- Checkboxes to toggle the left sidebar -->
-<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
-<label class="overlay overlay-navbar" for="__navigation">
-<div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
-<label class="overlay overlay-pagetoc" for="__page-toc">
-<div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-<div class="container-fluid" id="banner"></div>
-<div class="container-xl">
-<div class="row">
-<!-- Sidebar -->
-<div class="bd-sidebar noprint single-page" id="site-navigation">
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<input class="sidebar-toggle" id="pst-primary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+<input class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="" autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="" spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
 </div>
-<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
+</div>
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<a class="navbar-brand logo" href="index.html">
+<p class="title logo__title"></p>
+</a></div>
+<div class="sidebar-primary-item">
+<script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content" role="main">
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-<div class="header-article row sticky-top noprint">
-<div class="col py-1 d-flex header-article-main">
-<div class="header-article__left">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
+</button></div>
 </div>
-<div class="header-article__right"><label class="headerbtn headerbtn-page-toc" for="__page-toc">
-<span class="headerbtn__icon-container">
-<i class="fas fa-list"></i>
+<div class="header-article-items__end">
+<div class="header-article-item">
+<div class="article-header-buttons">
+<div class="dropdown dropdown-download-buttons">
+<button aria-expanded="false" aria-label="Download this page" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-download"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-download-source-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="../src/auto_trainer.ipynb" target="_blank" title="Download source file">
+<span class="btn__icon-container">
+<i class="fas fa-file"></i>
 </span>
-</label>
-</div>
-</div>
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-<div class="tocsection onthispage pt-5 pb-3">
-<i class="fas fa-list"></i> Contents
-    </div>
-<nav aria-label="Page" id="bd-toc-nav">
-<ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#fetching-a-dataset">
-<strong>
-    Fetching a Dataset
-   </strong>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#importing-the-mlhandlers-functions-from-the-marketplace">
-<strong>
-    Importing the MLhandlers functions from the Marketplace
-   </strong>
-</a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#training-a-model">
-<strong>
-    Training a model
-   </strong>
-</a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#define-task-parameters">
-     Define task parameters¶
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#running-the-training-job-with-the-train-handler">
-     Running the Training job with the “train” handler
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#the-result-of-the-train-run">
-     The result of the train run
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#getting-the-model-for-evaluating-and-predicting">
-     Getting the model for evaluating and predicting
-    </a>
+<li>
+<button class="btn btn-sm btn-download-pdf-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="window.print()" title="Print to PDF">
+<span class="btn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
 </ul>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#evaluating-a-model">
-<strong>
-    Evaluating a model
-   </strong>
-</a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#the-result-of-the-evaluate-run">
-     The result of the evaluate run
-    </a>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#making-a-prediction">
-<strong>
-    Making a prediction
-   </strong>
-</a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#showing-the-predeiction-results">
-     Showing the predeiction results
-    </a>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
+</div>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
+</button>
+</div></div>
 </div>
 </div>
-<div class="article row">
-<div class="col pl-md-3 pl-lg-5 content-container">
-<!-- Table of contents that is only displayed when printing the page -->
+</div>
 <div class="onlyprint" id="jb-print-docs-body">
 <h1>MLRun Auto-Trainer Tutorial</h1>
 <!-- Table of contents -->
@@ -166,75 +164,21 @@
 </div>
 <nav aria-label="Page">
 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#fetching-a-dataset">
-<strong>
-    Fetching a Dataset
-   </strong>
-</a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#importing-the-mlhandlers-functions-from-the-marketplace">
-<strong>
-    Importing the MLhandlers functions from the Marketplace
-   </strong>
-</a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#training-a-model">
-<strong>
-    Training a model
-   </strong>
-</a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#define-task-parameters">
-     Define task parameters¶
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#running-the-training-job-with-the-train-handler">
-     Running the Training job with the “train” handler
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#the-result-of-the-train-run">
-     The result of the train run
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#getting-the-model-for-evaluating-and-predicting">
-     Getting the model for evaluating and predicting
-    </a>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-a-dataset"><strong>Fetching a Dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-the-mlhandlers-functions-from-the-marketplace"><strong>Importing the MLhandlers functions from the Marketplace</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-model"><strong>Training a model</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-task-parameters">Define task parameters¶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-training-job-with-the-train-handler">Running the Training job with the “train” handler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-result-of-the-train-run">The result of the train run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-model-for-evaluating-and-predicting">Getting the model for evaluating and predicting</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#evaluating-a-model">
-<strong>
-    Evaluating a model
-   </strong>
-</a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#the-result-of-the-evaluate-run">
-     The result of the evaluate run
-    </a>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-a-model"><strong>Evaluating a model</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-result-of-the-evaluate-run">The result of the evaluate run</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#making-a-prediction">
-<strong>
-    Making a prediction
-   </strong>
-</a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#showing-the-predeiction-results">
-     Showing the predeiction results
-    </a>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-prediction"><strong>Making a prediction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#showing-the-predeiction-results">Showing the predeiction results</a></li>
 </ul>
 </li>
 </ul>
@@ -242,10 +186,10 @@
 </div>
 </div>
 </div>
-<main id="main-content" role="main">
-<div>
+<div id="searchbox"></div>
+<article class="bd-article">
 <section id="mlrun-auto-trainer-tutorial">
-<h1>MLRun Auto-Trainer Tutorial<a class="headerlink" href="#mlrun-auto-trainer-tutorial" title="Permalink to this headline">#</a></h1>
+<h1>MLRun Auto-Trainer Tutorial<a class="headerlink" href="#mlrun-auto-trainer-tutorial" title="Link to this heading">#</a></h1>
 <p>This notebook shows how to use the handlers of the MLRun’s Auto-trainer.
 the following handlers are:</p>
 <ul class="simple">
@@ -269,7 +213,7 @@ the following handlers are:</p>
 </div>
 </div>
 <section id="fetching-a-dataset">
-<h2><strong>Fetching a Dataset</strong><a class="headerlink" href="#fetching-a-dataset" title="Permalink to this headline">#</a></h2>
+<h2><strong>Fetching a Dataset</strong><a class="headerlink" href="#fetching-a-dataset" title="Link to this heading">#</a></h2>
 <p>To generate the dataset we used the “gen_class_data” function from the hub,
 which wraps scikit-learn’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html#sklearn-datasets-make-classification">make_classification</a>.<br/>
 See the link for a description of all parameters.</p>
@@ -289,7 +233,7 @@ See the link for a description of all parameters.</p>
 </div>
 </section>
 <section id="importing-the-mlhandlers-functions-from-the-marketplace">
-<h2><strong>Importing the MLhandlers functions from the Marketplace</strong><a class="headerlink" href="#importing-the-mlhandlers-functions-from-the-marketplace" title="Permalink to this headline">#</a></h2>
+<h2><strong>Importing the MLhandlers functions from the Marketplace</strong><a class="headerlink" href="#importing-the-mlhandlers-functions-from-the-marketplace" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">auto_trainer</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://auto_trainer"</span><span class="p">)</span>
@@ -299,10 +243,10 @@ See the link for a description of all parameters.</p>
 </div>
 </section>
 <section id="training-a-model">
-<h2><strong>Training a model</strong><a class="headerlink" href="#training-a-model" title="Permalink to this headline">#</a></h2>
+<h2><strong>Training a model</strong><a class="headerlink" href="#training-a-model" title="Link to this heading">#</a></h2>
 <p>Choosing the <code class="docutils literal notranslate"><span class="pre">train</span></code> handler</p>
 <section id="define-task-parameters">
-<h3>Define task parameters¶<a class="headerlink" href="#define-task-parameters" title="Permalink to this headline">#</a></h3>
+<h3>Define task parameters¶<a class="headerlink" href="#define-task-parameters" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Class parameters should contain the prefix <code class="docutils literal notranslate"><span class="pre">CLASS_</span></code></p></li>
 <li><p>Fit parameters should contain the prefix <code class="docutils literal notranslate"><span class="pre">FIT_</span></code></p></li>
@@ -320,7 +264,7 @@ See the link for a description of all parameters.</p>
 </div>
 </section>
 <section id="running-the-training-job-with-the-train-handler">
-<h3>Running the Training job with the “train” handler<a class="headerlink" href="#running-the-training-job-with-the-train-handler" title="Permalink to this headline">#</a></h3>
+<h3>Running the Training job with the “train” handler<a class="headerlink" href="#running-the-training-job-with-the-train-handler" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_run</span> <span class="o">=</span> <span class="n">auto_trainer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
@@ -343,7 +287,7 @@ See the link for a description of all parameters.</p>
 </div>
 </section>
 <section id="the-result-of-the-train-run">
-<h3>The result of the train run<a class="headerlink" href="#the-result-of-the-train-run" title="Permalink to this headline">#</a></h3>
+<h3>The result of the train run<a class="headerlink" href="#the-result-of-the-train-run" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_run</span><span class="o">.</span><span class="n">outputs</span>
@@ -360,7 +304,7 @@ See the link for a description of all parameters.</p>
 </div>
 </section>
 <section id="getting-the-model-for-evaluating-and-predicting">
-<h3>Getting the model for evaluating and predicting<a class="headerlink" href="#getting-the-model-for-evaluating-and-predicting" title="Permalink to this headline">#</a></h3>
+<h3>Getting the model for evaluating and predicting<a class="headerlink" href="#getting-the-model-for-evaluating-and-predicting" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_path</span> <span class="o">=</span> <span class="n">train_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'model'</span><span class="p">]</span>
@@ -371,7 +315,7 @@ See the link for a description of all parameters.</p>
 </section>
 </section>
 <section id="evaluating-a-model">
-<h2><strong>Evaluating a model</strong><a class="headerlink" href="#evaluating-a-model" title="Permalink to this headline">#</a></h2>
+<h2><strong>Evaluating a model</strong><a class="headerlink" href="#evaluating-a-model" title="Link to this heading">#</a></h2>
 <p>Choosing the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> handler</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -390,7 +334,7 @@ See the link for a description of all parameters.</p>
 </div>
 </div>
 <section id="the-result-of-the-evaluate-run">
-<h3>The result of the evaluate run<a class="headerlink" href="#the-result-of-the-evaluate-run" title="Permalink to this headline">#</a></h3>
+<h3>The result of the evaluate run<a class="headerlink" href="#the-result-of-the-evaluate-run" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_run</span><span class="o">.</span><span class="n">outputs</span>
@@ -401,7 +345,7 @@ See the link for a description of all parameters.</p>
 </section>
 </section>
 <section id="making-a-prediction">
-<h2><strong>Making a prediction</strong><a class="headerlink" href="#making-a-prediction" title="Permalink to this headline">#</a></h2>
+<h2><strong>Making a prediction</strong><a class="headerlink" href="#making-a-prediction" title="Link to this heading">#</a></h2>
 <p>Choosing the <code class="docutils literal notranslate"><span class="pre">predict</span></code> handler. For predicting from a simple sample (a <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">lists</span></code>,<code class="docutils literal notranslate"><span class="pre">dict</span></code>) pass the dataset as a <code class="docutils literal notranslate"><span class="pre">param</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -434,7 +378,7 @@ See the link for a description of all parameters.</p>
 </div>
 </div>
 <section id="showing-the-predeiction-results">
-<h3>Showing the predeiction results<a class="headerlink" href="#showing-the-predeiction-results" title="Permalink to this headline">#</a></h3>
+<h3>Showing the predeiction results<a class="headerlink" href="#showing-the-predeiction-results" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predict_run</span><span class="o">.</span><span class="n">outputs</span>
@@ -449,30 +393,63 @@ See the link for a description of all parameters.</p>
 </div>
 </div>
 </div>
-<p><span class="xref myst">Back to the top</span></p>
+<p><a class="reference internal" href="#XGBoost-trainer"><span class="xref myst">Back to the top</span></a></p>
 </section>
 </section>
 </section>
-</div>
-</main>
-<footer class="footer-article noprint">
-<!-- Previous / next buttons -->
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
 </div>
 </footer>
 </div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
+  </div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-a-dataset"><strong>Fetching a Dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-the-mlhandlers-functions-from-the-marketplace"><strong>Importing the MLhandlers functions from the Marketplace</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-model"><strong>Training a model</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-task-parameters">Define task parameters¶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-training-job-with-the-train-handler">Running the Training job with the “train” handler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-result-of-the-train-run">The result of the train run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-model-for-evaluating-and-predicting">Getting the model for evaluating and predicting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-a-model"><strong>Evaluating a model</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-result-of-the-evaluate-run">The result of the evaluate run</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-prediction"><strong>Making a prediction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#showing-the-predeiction-results">Showing the predeiction results</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div></div>
 </div>
-<div class="footer-content row">
-<footer class="col footer"><p>
-  
-      © Copyright .<br>
-</br></p>
+<footer class="bd-footer-content">
+<div class="bd-footer-content__inner container">
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
 </footer>
-</div>
-</div>
+</main>
 </div>
 </div>
 <!-- Scripts loaded after <body> so the DOM is not blocked -->
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+<footer class="bd-footer">
+</footer>
 </body>
 </html>
