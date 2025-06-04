@@ -1,144 +1,159 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html data-content_root="./" data-theme="light" lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Translate tutorial</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
 <!-- Loaded before other Sphinx assets -->
-<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
-<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
-<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/css/custom.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css?v=8f2a1f02" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/css/custom.css?v=9816bda1" rel="stylesheet" type="text/css"/>
 <!-- Pre-loaded scripts that we'll load fully later -->
-<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
-<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-<script src="../../../_static/jquery.js"></script>
-<script src="../../../_static/underscore.js"></script>
-<script src="../../../_static/doctools.js"></script>
+<link as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+<script src="../../../_static/doctools.js?v=9bcbadda"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 <script>let toggleHintShow = 'Click to show';</script>
 <script>let toggleHintHide = 'Click to hide';</script>
 <script>let toggleOpenOnPrint = 'true';</script>
-<script src="../../../_static/togglebutton.js"></script>
-<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
 <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-<link href="genindex.html" rel="index" title="Index">
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'translate_example';</script>
+<link href="genindex.html" rel="index" title="Index"/>
 <link href="search.html" rel="search" title="Search"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="en" name="docsearch:language"/>
-<!-- Google Analytics -->
-</link></link></link></link></link></link></head>
-<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
-<!-- Checkboxes to toggle the left sidebar -->
-<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
-<label class="overlay overlay-navbar" for="__navigation">
-<div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
-<label class="overlay overlay-pagetoc" for="__page-toc">
-<div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-<div class="container-fluid" id="banner"></div>
-<div class="container-xl">
-<div class="row">
-<!-- Sidebar -->
-<div class="bd-sidebar noprint single-page" id="site-navigation">
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="light" data-offset="180">
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<input class="sidebar-toggle" id="pst-primary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+<input class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="" autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="" spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
 </div>
-<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
+</div>
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<a class="navbar-brand logo" href="index.html">
+<p class="title logo__title"></p>
+</a></div>
+<div class="sidebar-primary-item">
+<script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content" role="main">
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-<div class="header-article row sticky-top noprint">
-<div class="col py-1 d-flex header-article-main">
-<div class="header-article__left">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
+</button></div>
 </div>
-<div class="header-article__right"><label class="headerbtn headerbtn-page-toc" for="__page-toc">
-<span class="headerbtn__icon-container">
-<i class="fas fa-list"></i>
+<div class="header-article-items__end">
+<div class="header-article-item">
+<div class="article-header-buttons">
+<div class="dropdown dropdown-download-buttons">
+<button aria-expanded="false" aria-label="Download this page" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-download"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-download-source-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="../src/translate.ipynb" target="_blank" title="Download source file">
+<span class="btn__icon-container">
+<i class="fas fa-file"></i>
 </span>
-</label>
-</div>
-</div>
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-<div class="tocsection onthispage pt-5 pb-3">
-<i class="fas fa-list"></i> Contents
-    </div>
-<nav aria-label="Page" id="bd-toc-nav">
-<ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#short-description-and-explenation">
-   Short description and explenation
-  </a>
+<span class="btn__text-container">.ipynb</span>
+</a>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#background">
-   Background
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#requirements">
-   Requirements
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#documentation">
-   Documentation
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#demo">
-   Demo
-  </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#import-the-function-import-mlrun-set-project-and-import-function">
-     (1.) Import the function (import mlrun, set project and import function)
-    </a>
+<li>
+<button class="btn btn-sm btn-download-pdf-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="window.print()" title="Print to PDF">
+<span class="btn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
 </ul>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#usage">
-   Usage
-  </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#manual-model-selection">
-     (2.1.) Manual model selection
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#auto-model-detectyion">
-     (2.1.) Auto model detectyion
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#review-results">
-     (3.) Review results
-    </a>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
+</div>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
+</button>
+</div></div>
 </div>
 </div>
-<div class="article row">
-<div class="col pl-md-3 pl-lg-5 content-container">
-<!-- Table of contents that is only displayed when printing the page -->
+</div>
 <div class="onlyprint" id="jb-print-docs-body">
 <h1>Translate tutorial</h1>
 <!-- Table of contents -->
@@ -149,58 +164,18 @@
 </div>
 <nav aria-label="Page">
 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#short-description-and-explenation">
-   Short description and explenation
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#background">
-   Background
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#requirements">
-   Requirements
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#documentation">
-   Documentation
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#demo">
-   Demo
-  </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#import-the-function-import-mlrun-set-project-and-import-function">
-     (1.) Import the function (import mlrun, set project and import function)
-    </a>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-description-and-explenation">Short description and explenation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo">Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-function-import-mlrun-set-project-and-import-function">(1.) Import the function (import mlrun, set project and import function)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#usage">
-   Usage
-  </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#manual-model-selection">
-     (2.1.) Manual model selection
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#auto-model-detectyion">
-     (2.1.) Auto model detectyion
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#review-results">
-     (3.) Review results
-    </a>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-model-selection">(2.1.) Manual model selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-model-detectyion">(2.1.) Auto model detectyion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-results">(3.) Review results</a></li>
 </ul>
 </li>
 </ul>
@@ -208,12 +183,12 @@
 </div>
 </div>
 </div>
-<main id="main-content" role="main">
-<div>
+<div id="searchbox"></div>
+<article class="bd-article">
 <section id="translate-tutorial">
-<h1>Translate tutorial<a class="headerlink" href="#translate-tutorial" title="Permalink to this headline">#</a></h1>
+<h1>Translate tutorial<a class="headerlink" href="#translate-tutorial" title="Link to this heading">#</a></h1>
 <section id="short-description-and-explenation">
-<h2>Short description and explenation<a class="headerlink" href="#short-description-and-explenation" title="Permalink to this headline">#</a></h2>
+<h2>Short description and explenation<a class="headerlink" href="#short-description-and-explenation" title="Link to this heading">#</a></h2>
 <p>Machine translation has made huge strides in recent years thanks to advances in deep learning, our translte function makes it even easier to use. <br/>
 Simply tell it where your file is and the languages you’re working with (the one you’re translating from and the one you want),<br/>
 and this function takes care of the rest. It cleverly picks the right pre-trained model for your language pair, ensuring top-notch translations.<br/></p>
@@ -221,7 +196,7 @@ and this function takes care of the rest. It cleverly picks the right pre-traine
 <p>With this function, language translation becomes a breeze, making your documents accessible in any language without breaking a sweat.</p>
 </section>
 <section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
 <p>The function takes two parameters: a model name or the source and target languages, and a path to one or more text files to translate.</p>
 <p>It first checks if a model name was passed. If so, it loads that Helsinki-NLP model.<br/>
 If not, it looks at the source and target languages and loads the appropriate Helsinki-NLP translation model.</p>
@@ -231,12 +206,12 @@ If not, it looks at the source and target languages and loads the appropriate He
 <p>This function auto-model selection is based on the great translation models offered by Helsinki. Check them out https://huggingface.co/Helsinki-NLP</p>
 </section>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">transformers</span></code> <br/>
 <code class="docutils literal notranslate"><span class="pre">tqdm</span></code> <br/></p>
 </section>
 <section id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h2>
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">data_path</span></code>:          A directory of text files or a single text file or a list of files to translate.</p>
 <p><code class="docutils literal notranslate"><span class="pre">output_directory</span></code>:   Directory where the translated files will be saved.</p>
 <p><code class="docutils literal notranslate"><span class="pre">model_name</span></code>:         The name of a model to load. If None, the model name is constructed using the source and<br/>
@@ -252,10 +227,10 @@ sentences can be batched.</p>
 the translation inference. Notice the batch size here is being added automatically.</p>
 </section>
 <section id="demo">
-<h2>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">#</a></h2>
+<h2>Demo<a class="headerlink" href="#demo" title="Link to this heading">#</a></h2>
 <p>The following demo will show an example of translating a text file written in turkish to eanglish using the <em>tranlate</em> function. <br/></p>
 <section id="import-the-function-import-mlrun-set-project-and-import-function">
-<h3>(1.) Import the function (import mlrun, set project and import function)<a class="headerlink" href="#import-the-function-import-mlrun-set-project-and-import-function" title="Permalink to this headline">#</a></h3>
+<h3>(1.) Import the function (import mlrun, set project and import function)<a class="headerlink" href="#import-the-function-import-mlrun-set-project-and-import-function" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
@@ -294,9 +269,9 @@ the translation inference. Notice the batch size here is being added automatical
 </section>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">#</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
 <section id="manual-model-selection">
-<h3>(2.1.) Manual model selection<a class="headerlink" href="#manual-model-selection" title="Permalink to this headline">#</a></h3>
+<h3>(2.1.) Manual model selection<a class="headerlink" href="#manual-model-selection" title="Link to this heading">#</a></h3>
 <p>Here we run our function that we’ve imported from the MLRun Function Hub. <br/>
 We select the specific model, give the function a path to to the file and output directory and choose to run on the cpu.</p>
 <div class="cell docutils container">
@@ -530,7 +505,7 @@ function closePanel(el) {
 </div>
 </section>
 <section id="auto-model-detectyion">
-<h3>(2.1.) Auto model detectyion<a class="headerlink" href="#auto-model-detectyion" title="Permalink to this headline">#</a></h3>
+<h3>(2.1.) Auto model detectyion<a class="headerlink" href="#auto-model-detectyion" title="Link to this heading">#</a></h3>
 <p>Here we run our function that we’ve imported from the MLRun Function Hub. <br/>
 We select the languages to use for choosing the model, give the function a path to to the file and output directory and choose to run on the cpu.</p>
 <div class="cell docutils container">
@@ -558,7 +533,7 @@ We select the languages to use for choosing the model, give the function a path 
 <p>We can take alook at the file created</p>
 </section>
 <section id="review-results">
-<h3>(3.) Review results<a class="headerlink" href="#review-results" title="Permalink to this headline">#</a></h3>
+<h3>(3.) Review results<a class="headerlink" href="#review-results" title="Link to this heading">#</a></h3>
 <p>We can look at the articat returned, the import</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -617,26 +592,56 @@ Ali reads a book every night.
 </section>
 </section>
 </section>
-</div>
-</main>
-<footer class="footer-article noprint">
-<!-- Previous / next buttons -->
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
 </div>
 </footer>
 </div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
+  </div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-description-and-explenation">Short description and explenation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo">Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-function-import-mlrun-set-project-and-import-function">(1.) Import the function (import mlrun, set project and import function)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-model-selection">(2.1.) Manual model selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-model-detectyion">(2.1.) Auto model detectyion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-results">(3.) Review results</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div></div>
 </div>
-<div class="footer-content row">
-<footer class="col footer"><p>
-  
-      © Copyright .<br>
-</br></p>
+<footer class="bd-footer-content">
+<div class="bd-footer-content__inner container">
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
 </footer>
-</div>
-</div>
+</main>
 </div>
 </div>
 <!-- Scripts loaded after <body> so the DOM is not blocked -->
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+<footer class="bd-footer">
+</footer>
 </body>
 </html>

@@ -1,151 +1,159 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html data-content_root="./" data-theme="light" lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Batch Inference</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
 <!-- Loaded before other Sphinx assets -->
-<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
-<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
-<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/css/custom.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css?v=8f2a1f02" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/css/custom.css?v=9816bda1" rel="stylesheet" type="text/css"/>
 <!-- Pre-loaded scripts that we'll load fully later -->
-<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
-<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-<script src="../../../_static/jquery.js"></script>
-<script src="../../../_static/underscore.js"></script>
-<script src="../../../_static/doctools.js"></script>
+<link as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+<script src="../../../_static/doctools.js?v=9bcbadda"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 <script>let toggleHintShow = 'Click to show';</script>
 <script>let toggleHintHide = 'Click to hide';</script>
 <script>let toggleOpenOnPrint = 'true';</script>
-<script src="../../../_static/togglebutton.js"></script>
-<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
 <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-<link href="genindex.html" rel="index" title="Index">
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'batch_inference_example';</script>
+<link href="genindex.html" rel="index" title="Index"/>
 <link href="search.html" rel="search" title="Search"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="en" name="docsearch:language"/>
-<!-- Google Analytics -->
-</link></link></link></link></link></link></head>
-<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
-<!-- Checkboxes to toggle the left sidebar -->
-<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
-<label class="overlay overlay-navbar" for="__navigation">
-<div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
-<label class="overlay overlay-pagetoc" for="__page-toc">
-<div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-<div class="container-fluid" id="banner"></div>
-<div class="container-xl">
-<div class="row">
-<!-- Sidebar -->
-<div class="bd-sidebar noprint single-page" id="site-navigation">
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="light" data-offset="180">
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<input class="sidebar-toggle" id="pst-primary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+<input class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="" autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="" spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
 </div>
-<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
+</div>
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<a class="navbar-brand logo" href="index.html">
+<p class="title logo__title"></p>
+</a></div>
+<div class="sidebar-primary-item">
+<script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content" role="main">
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-<div class="header-article row sticky-top noprint">
-<div class="col py-1 d-flex header-article-main">
-<div class="header-article__left">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
+</button></div>
 </div>
-<div class="header-article__right"><label class="headerbtn headerbtn-page-toc" for="__page-toc">
-<span class="headerbtn__icon-container">
-<i class="fas fa-list"></i>
+<div class="header-article-items__end">
+<div class="header-article-item">
+<div class="article-header-buttons">
+<div class="dropdown dropdown-download-buttons">
+<button aria-expanded="false" aria-label="Download this page" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-download"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-download-source-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="../src/batch_inference.ipynb" target="_blank" title="Download source file">
+<span class="btn__icon-container">
+<i class="fas fa-file"></i>
 </span>
-</label>
-</div>
-</div>
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-<div class="tocsection onthispage pt-5 pb-3">
-<i class="fas fa-list"></i> Contents
-    </div>
-<nav aria-label="Page" id="bd-toc-nav">
-<ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#documentation">
-   1. Documentation
-  </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#parameters">
-     1.1. Parameters:
-    </a>
+<span class="btn__text-container">.ipynb</span>
+</a>
 </li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#outputs">
-     1.2. Outputs
-    </a>
+<li>
+<button class="btn btn-sm btn-download-pdf-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="window.print()" title="Print to PDF">
+<span class="btn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
 </ul>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#results-prediction">
-   2. Results Prediction
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#data-drift-analysis">
-   3. Data Drift Analysis
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#end-to-end-demo">
-   4. End-to-end Demo
-  </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#code-review">
-     4.1. Code review
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#run-the-example-with-mlrun">
-     4.2. Run the Example with MLRun
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#review-outputs">
-     4.3. Review Outputs
-    </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry">
-<a class="reference internal nav-link" href="#id1">
-       4.3.1. Results Prediction
-      </a>
-</li>
-<li class="toc-h4 nav-item toc-entry">
-<a class="reference internal nav-link" href="#id2">
-       4.3.2. Data Drift Analysis
-      </a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
+</div>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
+</button>
+</div></div>
 </div>
 </div>
-<div class="article row">
-<div class="col pl-md-3 pl-lg-5 content-container">
-<!-- Table of contents that is only displayed when printing the page -->
+</div>
 <div class="onlyprint" id="jb-print-docs-body">
 <h1>Batch Inference</h1>
 <!-- Table of contents -->
@@ -156,63 +164,19 @@
 </div>
 <nav aria-label="Page">
 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#documentation">
-   1. Documentation
-  </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#parameters">
-     1.1. Parameters:
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#outputs">
-     1.2. Outputs
-    </a>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">1. Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">1.1. Parameters:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">1.2. Outputs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#results-prediction">
-   2. Results Prediction
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#data-drift-analysis">
-   3. Data Drift Analysis
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#end-to-end-demo">
-   4. End-to-end Demo
-  </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#code-review">
-     4.1. Code review
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#run-the-example-with-mlrun">
-     4.2. Run the Example with MLRun
-    </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#review-outputs">
-     4.3. Review Outputs
-    </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry">
-<a class="reference internal nav-link" href="#id1">
-       4.3.1. Results Prediction
-      </a>
-</li>
-<li class="toc-h4 nav-item toc-entry">
-<a class="reference internal nav-link" href="#id2">
-       4.3.2. Data Drift Analysis
-      </a>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-prediction">2. Results Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-drift-analysis">3. Data Drift Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-demo">4. End-to-end Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-review">4.1. Code review</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-example-with-mlrun">4.2. Run the Example with MLRun</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-outputs">4.3. Review Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.3.1. Results Prediction</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.3.2. Data Drift Analysis</a></li>
 </ul>
 </li>
 </ul>
@@ -222,24 +186,24 @@
 </div>
 </div>
 </div>
-<main id="main-content" role="main">
-<div>
+<div id="searchbox"></div>
+<article class="bd-article">
 <section id="batch-inference">
-<h1>Batch Inference<a class="headerlink" href="#batch-inference" title="Permalink to this headline">#</a></h1>
+<h1>Batch Inference<a class="headerlink" href="#batch-inference" title="Link to this heading">#</a></h1>
 <p>A function for inferring given input through a given model while producing a <strong>Result Set</strong> and performing <strong>Data Drift Analysis</strong>.</p>
 <p>In this notebook we will go over the function’s docs and outputs and see an end-to-end example of running it.</p>
 <ol class="arabic simple">
-<li><p><span class="xref myst">Documentation</span></p></li>
-<li><p><span class="xref myst">Results Prediction</span></p></li>
-<li><p><span class="xref myst">Data Drift Analysis</span></p></li>
-<li><p><span class="xref myst">End-to-end Demo</span></p></li>
+<li><p><a class="reference internal" href="#chapter1"><span class="xref myst">Documentation</span></a></p></li>
+<li><p><a class="reference internal" href="#chapter2"><span class="xref myst">Results Prediction</span></a></p></li>
+<li><p><a class="reference internal" href="#chapter3"><span class="xref myst">Data Drift Analysis</span></a></p></li>
+<li><p><a class="reference internal" href="#chapter4"><span class="xref myst">End-to-end Demo</span></a></p></li>
 </ol>
 <p><a id="chapter1"></a></p>
 <section id="documentation">
-<h2>1. Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h2>
+<h2>1. Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
 <p>Perform a prediction on a given dataset with the given model. Can perform drift analysis between the sample set statistics stored in the model to the current input data. The drift rule is the value per-feature mean of the TVD and Hellinger scores according to the thresholds configures here.</p>
 <section id="parameters">
-<h3>1.1. Parameters:<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
+<h3>1.1. Parameters:<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
 <ul>
 <li><p><strong>context</strong>: <code class="docutils literal notranslate"><span class="pre">mlrun.MLClientCtx</span></code></p>
 <p>An MLRun context.</p>
@@ -298,16 +262,16 @@ from type list or numpy array.</p>
 </ul>
 </section>
 <section id="outputs">
-<h3>1.2. Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">#</a></h3>
+<h3>1.2. Outputs<a class="headerlink" href="#outputs" title="Link to this heading">#</a></h3>
 <p>The outputs are split to two actions the functions can perform:</p>
 <ul class="simple">
-<li><p><span class="xref myst"><strong>Results Prediction</strong></span> - Will log:</p>
+<li><p><a class="reference internal" href="#chapter2"><span class="xref myst"><strong>Results Prediction</strong></span></a> - Will log:</p>
 <ul>
 <li><p>A dataset artifact named by the <code class="docutils literal notranslate"><span class="pre">result_set_name</span></code> parameter.</p></li>
 <li><p>A <code class="docutils literal notranslate"><span class="pre">str</span></code> result named <code class="docutils literal notranslate"><span class="pre">"batch_id"</span></code> of the given / generated batch ID.</p></li>
 </ul>
 </li>
-<li><p><span class="xref myst"><strong>Data Drift Analysis</strong></span> - Will log:</p>
+<li><p><a class="reference internal" href="#chapter3"><span class="xref myst"><strong>Data Drift Analysis</strong></span></a> - Will log:</p>
 <ul>
 <li><p>A <code class="docutils literal notranslate"><span class="pre">plotly</span></code> artifact named <code class="docutils literal notranslate"><span class="pre">"data_drift_table"</span></code> with a visualization of the drifts results and histograms.</p></li>
 <li><p>A json artifact named <code class="docutils literal notranslate"><span class="pre">"features_drift_results"</span></code> with all the features metric values.</p></li>
@@ -321,10 +285,10 @@ from type list or numpy array.</p>
 </section>
 </section>
 <section id="results-prediction">
-<h2>2. Results Prediction<a class="headerlink" href="#results-prediction" title="Permalink to this headline">#</a></h2>
+<h2>2. Results Prediction<a class="headerlink" href="#results-prediction" title="Link to this heading">#</a></h2>
 <p>The result set is a concatenated dataset of the inputs ($X$) provided and the predictions ($Y$) yielded by the model, so it will be $X | Y$.</p>
 <p>For example, if the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> given as inputs was:</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>x1</p></th>
 <th class="head"><p>x2</p></th>
@@ -354,8 +318,9 @@ from type list or numpy array.</p>
 </tr>
 </tbody>
 </table>
+</div>
 <p>And the outputs yielded by the model’s prediction was:</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>y1</p></th>
 <th class="head"><p>y2</p></th>
@@ -373,8 +338,9 @@ from type list or numpy array.</p>
 </tr>
 </tbody>
 </table>
+</div>
 <p>Then the result set will be:</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>x1</p></th>
 <th class="head"><p>x2</p></th>
@@ -412,6 +378,7 @@ from type list or numpy array.</p>
 </tr>
 </tbody>
 </table>
+</div>
 <p>In case the parameter <code class="docutils literal notranslate"><span class="pre">log_result_set</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the outputs of the results prediction will be:</p>
 <ul>
 <li><p>The result set as described above.</p></li>
@@ -426,7 +393,7 @@ from type list or numpy array.</p>
 <p><a id="chapter3"></a></p>
 </section>
 <section id="data-drift-analysis">
-<h2>3. Data Drift Analysis<a class="headerlink" href="#data-drift-analysis" title="Permalink to this headline">#</a></h2>
+<h2>3. Data Drift Analysis<a class="headerlink" href="#data-drift-analysis" title="Link to this heading">#</a></h2>
 <p>The data drift analysis is done per feature using two distance measure metrics for probability distributions.</p>
 <p>Let us mark our sample set as $S$ and our inputs as $I$. We will look at one feature $x$ out of $n$ features. Assuming the histograms of feature $x$ is split into 20 bins: $b_1,b_2,…,b_{20}$, we will match the feature $x$ histogram of the inputs $I$ ($x_I$) into the same bins (meaning to $x_S$) and compare their distributions using:</p>
 <ul class="simple">
@@ -438,7 +405,7 @@ from type list or numpy array.</p>
 <ul class="simple">
 <li><p><strong>Drift table plot</strong> - The results are presented in a <code class="docutils literal notranslate"><span class="pre">plotly</span></code> table artifact named <code class="docutils literal notranslate"><span class="pre">"drift_table_plot"</span></code> that shows each feature’s statistics and its TVD, Hellinger and KLD (Kullback–Leibler divergence) results as follows:</p></li>
 </ul>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p>Count</p></th>
@@ -524,6 +491,7 @@ from type list or numpy array.</p>
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li><p><strong>Features drift results</strong> - A rule metric per feature dictionary is saved in a json file named <code class="docutils literal notranslate"><span class="pre">"features_drift_results"</span></code> where each key is a feature and its value is the feature’s metric value: <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">float]</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -552,7 +520,7 @@ for $n$ features and metric rule $M(x_S,x_I)=\frac{H(x_S,x_I)+TVD(x_S,x_I)}{2}$,
 <p><a id="chapter4"></a></p>
 </section>
 <section id="end-to-end-demo">
-<h2>4. End-to-end Demo<a class="headerlink" href="#end-to-end-demo" title="Permalink to this headline">#</a></h2>
+<h2>4. End-to-end Demo<a class="headerlink" href="#end-to-end-demo" title="Link to this heading">#</a></h2>
 <p>We will see an end-to-end example that follows the steps below:</p>
 <ol class="arabic simple">
 <li><p>Generate data.</p></li>
@@ -560,7 +528,7 @@ for $n$ features and metric rule $M(x_S,x_I)=\frac{H(x_S,x_I)+TVD(x_S,x_I)}{2}$,
 <li><p>Infer data through the model using <code class="docutils literal notranslate"><span class="pre">batch_predict</span></code> and review the outputs.</p></li>
 </ol>
 <section id="code-review">
-<h3>4.1. Code review<a class="headerlink" href="#code-review" title="Permalink to this headline">#</a></h3>
+<h3>4.1. Code review<a class="headerlink" href="#code-review" title="Link to this heading">#</a></h3>
 <p>We are using a very simple example of training a decision tree on a binary classification problem. For that we wrote two functions:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">generate_data</span></code> - Generate a binary classification data. The data will be split into a <em>training set</em> and <em>data for prediction</em>. The data for prediction will be drifted in half of its features to showcase the plot later on.</p></li>
@@ -654,7 +622,7 @@ for $n$ features and metric rule $M(x_S,x_I)=\frac{H(x_S,x_I)+TVD(x_S,x_I)}{2}$,
 </div>
 </section>
 <section id="run-the-example-with-mlrun">
-<h3>4.2. Run the Example with MLRun<a class="headerlink" href="#run-the-example-with-mlrun" title="Permalink to this headline">#</a></h3>
+<h3>4.2. Run the Example with MLRun<a class="headerlink" href="#run-the-example-with-mlrun" title="Link to this heading">#</a></h3>
 <p>First, we will prepare our MLRun functions:</p>
 <ol class="arabic simple">
 <li><p>We will use <code class="docutils literal notranslate"><span class="pre">mlrun.code_to_function</span></code> to turn this demo notebook into an MLRun function we can run.</p></li>
@@ -1314,10 +1282,10 @@ function closePanel(el) {
 </div>
 </section>
 <section id="review-outputs">
-<h3>4.3. Review Outputs<a class="headerlink" href="#review-outputs" title="Permalink to this headline">#</a></h3>
+<h3>4.3. Review Outputs<a class="headerlink" href="#review-outputs" title="Link to this heading">#</a></h3>
 <p>We will review the outputs as explained in the notebook above.</p>
 <section id="id1">
-<h4>4.3.1. Results Prediction<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<h4>4.3.1. Results Prediction<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <p>First we will showcase the <strong>Result Set</strong>. As we didn’t send any name, it’s default name will be <code class="docutils literal notranslate"><span class="pre">"prediction"</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1639,7 +1607,7 @@ function closePanel(el) {
 </div>
 </section>
 <section id="id2">
-<h4>4.3.2. Data Drift Analysis<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+<h4>4.3.2. Data Drift Analysis<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <p>Second we will review the data drift table plot and the drift results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1736,26 +1704,59 @@ e.exports=function(t){return null!=t&&(n(t)||function(t){return"function"==typeo
 </section>
 </section>
 </section>
-</div>
-</main>
-<footer class="footer-article noprint">
-<!-- Previous / next buttons -->
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
 </div>
 </footer>
 </div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
+  </div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">1. Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">1.1. Parameters:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">1.2. Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-prediction">2. Results Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-drift-analysis">3. Data Drift Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-demo">4. End-to-end Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-review">4.1. Code review</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-example-with-mlrun">4.2. Run the Example with MLRun</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-outputs">4.3. Review Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.3.1. Results Prediction</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.3.2. Data Drift Analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div></div>
 </div>
-<div class="footer-content row">
-<footer class="col footer"><p>
-  
-      © Copyright .<br/>
-</p>
+<footer class="bd-footer-content">
+<div class="bd-footer-content__inner container">
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
 </footer>
-</div>
-</div>
+</main>
 </div>
 </div>
 <!-- Scripts loaded after <body> so the DOM is not blocked -->
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+<footer class="bd-footer">
+</footer>
 </body>
 </html>

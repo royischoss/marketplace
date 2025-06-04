@@ -1,105 +1,159 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html data-content_root="./" data-theme="light" lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>question_answering package</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
 <!-- Loaded before other Sphinx assets -->
-<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
-<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
-<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/css/custom.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css?v=8f2a1f02" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/css/custom.css?v=9816bda1" rel="stylesheet" type="text/css"/>
 <!-- Pre-loaded scripts that we'll load fully later -->
-<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
-<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-<script src="../../../_static/jquery.js"></script>
-<script src="../../../_static/underscore.js"></script>
-<script src="../../../_static/doctools.js"></script>
+<link as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+<script src="../../../_static/doctools.js?v=9bcbadda"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 <script>let toggleHintShow = 'Click to show';</script>
 <script>let toggleHintHide = 'Click to hide';</script>
 <script>let toggleOpenOnPrint = 'true';</script>
-<script src="../../../_static/togglebutton.js"></script>
-<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
 <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-<link href="genindex.html" rel="index" title="Index">
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'question_answering';</script>
+<link href="genindex.html" rel="index" title="Index"/>
 <link href="search.html" rel="search" title="Search"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="en" name="docsearch:language"/>
-<!-- Google Analytics -->
-</link></link></link></link></link></link></head>
-<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
-<!-- Checkboxes to toggle the left sidebar -->
-<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
-<label class="overlay overlay-navbar" for="__navigation">
-<div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
-<label class="overlay overlay-pagetoc" for="__page-toc">
-<div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-<div class="container-fluid" id="banner"></div>
-<div class="container-xl">
-<div class="row">
-<!-- Sidebar -->
-<div class="bd-sidebar noprint single-page" id="site-navigation">
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="light" data-offset="180">
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<input class="sidebar-toggle" id="pst-primary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+<input class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="" autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="" spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
 </div>
-<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
+</div>
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<a class="navbar-brand logo" href="index.html">
+<p class="title logo__title"></p>
+</a></div>
+<div class="sidebar-primary-item">
+<script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content" role="main">
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-<div class="header-article row sticky-top noprint">
-<div class="col py-1 d-flex header-article-main">
-<div class="header-article__left">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
+</button></div>
 </div>
-<div class="header-article__right"><label class="headerbtn headerbtn-page-toc" for="__page-toc">
-<span class="headerbtn__icon-container">
-<i class="fas fa-list"></i>
+<div class="header-article-items__end">
+<div class="header-article-item">
+<div class="article-header-buttons">
+<div class="dropdown dropdown-download-buttons">
+<button aria-expanded="false" aria-label="Download this page" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-download"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-download-source-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="_sources/question_answering.rst" target="_blank" title="Download source file">
+<span class="btn__icon-container">
+<i class="fas fa-file"></i>
 </span>
-</label>
-</div>
-</div>
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-<div class="tocsection onthispage pt-5 pb-3">
-<i class="fas fa-list"></i> Contents
-    </div>
-<nav aria-label="Page" id="bd-toc-nav">
-<ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#submodules">
-   Submodules
-  </a>
+<span class="btn__text-container">.rst</span>
+</a>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-question_answering.question_answering">
-   question_answering.question_answering module
-  </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-question_answering">
-   Module contents
-  </a>
+<li>
+<button class="btn btn-sm btn-download-pdf-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="window.print()" title="Print to PDF">
+<span class="btn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
 </ul>
-</nav>
+</div>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
+</button>
+</div></div>
 </div>
 </div>
-<div class="article row">
-<div class="col pl-md-3 pl-lg-5 content-container">
-<!-- Table of contents that is only displayed when printing the page -->
+</div>
 <div class="onlyprint" id="jb-print-docs-body">
 <h1>question_answering package</h1>
 <!-- Table of contents -->
@@ -110,129 +164,148 @@
 </div>
 <nav aria-label="Page">
 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#submodules">
-   Submodules
-  </a>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-question_answering.question_answering">question_answering.question_answering module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.ConfigKeys</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_COUNT"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.ConfigKeys.POLL_COUNT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_STRATEGY"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.ConfigKeys.POLL_STRATEGY</span></code></a></li>
+</ul>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-question_answering.question_answering">
-   question_answering.question_answering module
-  </a>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.AVERAGE"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.AVERAGE</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.MOST_COMMON"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.MOST_COMMON</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.average"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.average()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.do"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.do()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.most_common"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.most_common()</span></code></a></li>
+</ul>
 </li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-question_answering">
-   Module contents
-  </a>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.answer"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.answer()</span></code></a></li>
+</ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionHandler"><code class="docutils literal notranslate"><span class="pre">QuestionHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionHandler.ConfigKeys"><code class="docutils literal notranslate"><span class="pre">QuestionHandler.ConfigKeys</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionHandler.answer"><code class="docutils literal notranslate"><span class="pre">QuestionHandler.answer()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionTypes"><code class="docutils literal notranslate"><span class="pre">QuestionTypes</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionTypes.DEFAULT"><code class="docutils literal notranslate"><span class="pre">QuestionTypes.DEFAULT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionTypes.POLL"><code class="docutils literal notranslate"><span class="pre">QuestionTypes.POLL</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.answer_questions"><code class="docutils literal notranslate"><span class="pre">answer_questions()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.open_mpi_handler"><code class="docutils literal notranslate"><span class="pre">open_mpi_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-question_answering">Module contents</a></li>
 </ul>
 </nav>
 </div>
 </div>
 </div>
-<main id="main-content" role="main">
-<div>
+<div id="searchbox"></div>
+<article class="bd-article">
 <section id="question-answering-package">
-<h1>question_answering package<a class="headerlink" href="#question-answering-package" title="Permalink to this headline">#</a></h1>
+<h1>question_answering package<a class="headerlink" href="#question-answering-package" title="Link to this heading">#</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 </section>
 <section id="module-question_answering.question_answering">
-<span id="question-answering-question-answering-module"></span><h2>question_answering.question_answering module<a class="headerlink" href="#module-question_answering.question_answering" title="Permalink to this headline">#</a></h2>
+<span id="question-answering-question-answering-module"></span><h2>question_answering.question_answering module<a class="headerlink" href="#module-question_answering.question_answering" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">PollQuestionHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poll_count</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poll_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'most_common'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#question_answering.question_answering.QuestionHandler" title="question_answering.question_answering.QuestionHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">question_answering.question_answering.QuestionHandler</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">PollQuestionHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poll_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poll_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'most_common'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#question_answering.question_answering.QuestionHandler" title="question_answering.question_answering.QuestionHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuestionHandler</span></code></a></p>
 <p>Static class to hold all the possible poll question configurations options keys</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.ConfigKeys">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ConfigKeys</span></span><a class="reference internal" href="question_answering.html#PollQuestionHandler.ConfigKeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigKeys</span></span><a class="reference internal" href="question_answering.html#PollQuestionHandler.ConfigKeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class for handling questions answering for poll type questions.
 These type of question are answered by asking the same question multiple times
 and choosing the most common answer or the average answer.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_COUNT">
-<span class="sig-name descname"><span class="pre">POLL_COUNT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'poll_count'</span></em><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_COUNT" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">POLL_COUNT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'poll_count'</span></em><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_COUNT" title="Link to this definition">#</a></dt>
 <dd><p>The number of times to ask the same question.</p>
 </dd></dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_STRATEGY">
-<span class="sig-name descname"><span class="pre">POLL_STRATEGY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'poll_strategy'</span></em><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_STRATEGY" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">POLL_STRATEGY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'poll_strategy'</span></em><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_STRATEGY" title="Link to this definition">#</a></dt>
 <dd><p>The strategy to use for choosing the answer from the poll.</p>
 </dd></dl>
 </dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.Strategy">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Strategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler.Strategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Strategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler.Strategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>An enumeration.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.Strategy.AVERAGE">
-<span class="sig-name descname"><span class="pre">AVERAGE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'average'</span></em><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.AVERAGE" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">AVERAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'average'</span></em><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.AVERAGE" title="Link to this definition">#</a></dt>
 <dd><p>The average answer strategy.</p>
 </dd></dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.Strategy.MOST_COMMON">
-<span class="sig-name descname"><span class="pre">MOST_COMMON</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'most_common'</span></em><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.MOST_COMMON" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">MOST_COMMON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'most_common'</span></em><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.MOST_COMMON" title="Link to this definition">#</a></dt>
 <dd><p>The most common answer strategy.</p>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.Strategy.average">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">average</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler.Strategy.average"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.average" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">average</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler.Strategy.average"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.average" title="Link to this definition">#</a></dt>
 <dd><p>Calculate the average answer for a given list of answers.</p>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.Strategy.do">
-<span class="sig-name descname"><span class="pre">do</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler.Strategy.do"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.do" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">do</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler.Strategy.do"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.do" title="Link to this definition">#</a></dt>
 <dd><p>Perform the strategy.</p>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.Strategy.most_common">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">most_common</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler.Strategy.most_common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.most_common" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">most_common</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#PollQuestionHandler.Strategy.most_common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.Strategy.most_common" title="Link to this definition">#</a></dt>
 <dd><p>Calculate the most common answer for a given list of answers.</p>
 </dd></dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="question_answering.question_answering.PollQuestionHandler.answer">
-<span class="sig-name descname"><span class="pre">answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">questions_amount</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batched_input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_pipeline</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.Pipeline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.GenerationConfig</span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="question_answering.html#PollQuestionHandler.answer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.answer" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">questions_amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batched_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_pipeline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">transformers.Pipeline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">transformers.GenerationConfig</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="question_answering.html#PollQuestionHandler.answer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.PollQuestionHandler.answer" title="Link to this definition">#</a></dt>
 <dd><p>Answer questions with a context to the given text files contents by a pretrained LLM model in given pipeline.</p>
 </dd></dl>
 </dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="question_answering.question_answering.QuestionHandler">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">QuestionHandler</span></span><a class="reference internal" href="question_answering.html#QuestionHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.QuestionHandler" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">QuestionHandler</span></span><a class="reference internal" href="question_answering.html#QuestionHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.QuestionHandler" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class for handling questions answering for a given question type.
 This class is used as a base class for all question types, and for default question type (regular question
 answering without any special handling).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="question_answering.question_answering.QuestionHandler.ConfigKeys">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ConfigKeys</span></span><a class="reference internal" href="question_answering.html#QuestionHandler.ConfigKeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.QuestionHandler.ConfigKeys" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigKeys</span></span><a class="reference internal" href="question_answering.html#QuestionHandler.ConfigKeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.QuestionHandler.ConfigKeys" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="question_answering.question_answering.QuestionHandler.answer">
-<span class="sig-name descname"><span class="pre">answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">questions_amount</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batched_input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_pipeline</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.Pipeline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.GenerationConfig</span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="question_answering.html#QuestionHandler.answer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.QuestionHandler.answer" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">questions_amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batched_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_pipeline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">transformers.Pipeline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">transformers.GenerationConfig</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="question_answering.html#QuestionHandler.answer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.QuestionHandler.answer" title="Link to this definition">#</a></dt>
 <dd><p>Answer questions with a context to the given text files contents by a pretrained LLM model in given pipeline.</p>
 </dd></dl>
 </dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="question_answering.question_answering.QuestionTypes">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">QuestionTypes</span></span><a class="reference internal" href="question_answering.html#QuestionTypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.QuestionTypes" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">QuestionTypes</span></span><a class="reference internal" href="question_answering.html#QuestionTypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.QuestionTypes" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="question_answering.question_answering.QuestionTypes.DEFAULT">
-<span class="sig-name descname"><span class="pre">DEFAULT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'default'</span></em><a class="headerlink" href="#question_answering.question_answering.QuestionTypes.DEFAULT" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'default'</span></em><a class="headerlink" href="#question_answering.question_answering.QuestionTypes.DEFAULT" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="question_answering.question_answering.QuestionTypes.POLL">
-<span class="sig-name descname"><span class="pre">POLL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'poll'</span></em><a class="headerlink" href="#question_answering.question_answering.QuestionTypes.POLL" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">POLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'poll'</span></em><a class="headerlink" href="#question_answering.question_answering.QuestionTypes.POLL" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="question_answering.question_answering.answer_questions">
-<span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">answer_questions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_gptq_exllama_max_input_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer_kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_wrapper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions_wrapper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="question_answering.html#answer_questions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.answer_questions" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">answer_questions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_gptq_exllama_max_input_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_wrapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions_wrapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="question_answering.html#answer_questions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.answer_questions" title="Link to this definition">#</a></dt>
 <dd><p>Answer questions with a context to the given text files contents by a pretrained LLM model. Each text file will have
 the following prompt built:</p>
 <p>start of <cite>text_wrapper</cite>
@@ -245,7 +318,7 @@ end of <cite>text_wrapper</cite></p>
 n. &lt;questions[n-1]&gt;
 end of <cite>questions_wrapper</cite></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data_path</strong> – A path to a directory of text files or a path to a text file to ask
 questions about.</p></li>
@@ -280,7 +353,7 @@ for said group.</p></li>
 <li><p><strong>verbose</strong> – Whether to present logs of a progress bar and errors. Default: True.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><p>A tuple of:</p>
 <ul class="simple">
 <li><p>A dataframe dataset of the questions answers.</p></li>
@@ -292,33 +365,83 @@ for said group.</p></li>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="question_answering.question_answering.open_mpi_handler">
-<span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">open_mpi_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">worker_inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_worker_inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#open_mpi_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.open_mpi_handler" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">question_answering.question_answering.</span></span><span class="sig-name descname"><span class="pre">open_mpi_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">worker_inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_worker_inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="question_answering.html#open_mpi_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#question_answering.question_answering.open_mpi_handler" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 </section>
 <section id="module-question_answering">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-question_answering" title="Permalink to this headline">#</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-question_answering" title="Link to this heading">#</a></h2>
 </section>
 </section>
-</div>
-</main>
-<footer class="footer-article noprint">
-<!-- Previous / next buttons -->
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
 </div>
 </footer>
 </div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
+  </div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-question_answering.question_answering">question_answering.question_answering module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.ConfigKeys</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_COUNT"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.ConfigKeys.POLL_COUNT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.ConfigKeys.POLL_STRATEGY"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.ConfigKeys.POLL_STRATEGY</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.AVERAGE"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.AVERAGE</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.MOST_COMMON"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.MOST_COMMON</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.average"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.average()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.do"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.do()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.Strategy.most_common"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.Strategy.most_common()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.PollQuestionHandler.answer"><code class="docutils literal notranslate"><span class="pre">PollQuestionHandler.answer()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionHandler"><code class="docutils literal notranslate"><span class="pre">QuestionHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionHandler.ConfigKeys"><code class="docutils literal notranslate"><span class="pre">QuestionHandler.ConfigKeys</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionHandler.answer"><code class="docutils literal notranslate"><span class="pre">QuestionHandler.answer()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionTypes"><code class="docutils literal notranslate"><span class="pre">QuestionTypes</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionTypes.DEFAULT"><code class="docutils literal notranslate"><span class="pre">QuestionTypes.DEFAULT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.QuestionTypes.POLL"><code class="docutils literal notranslate"><span class="pre">QuestionTypes.POLL</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.answer_questions"><code class="docutils literal notranslate"><span class="pre">answer_questions()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question_answering.question_answering.open_mpi_handler"><code class="docutils literal notranslate"><span class="pre">open_mpi_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-question_answering">Module contents</a></li>
+</ul>
+</nav></div>
+</div></div>
 </div>
-<div class="footer-content row">
-<footer class="col footer"><p>
-  
-      © Copyright .<br/>
-</p>
+<footer class="bd-footer-content">
+<div class="bd-footer-content__inner container">
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
 </footer>
-</div>
-</div>
+</main>
 </div>
 </div>
 <!-- Scripts loaded after <body> so the DOM is not blocked -->
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+<footer class="bd-footer">
+</footer>
 </body>
 </html>

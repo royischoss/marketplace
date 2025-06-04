@@ -1,79 +1,134 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html data-content_root="../../" data-theme="light" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>transcribe.transcribe</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
 <!-- Loaded before other Sphinx assets -->
-<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
-<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
-<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
-<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
-<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/css/custom.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css?v=8f2a1f02" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/css/custom.css?v=9816bda1" rel="stylesheet" type="text/css"/>
 <!-- Pre-loaded scripts that we'll load fully later -->
-<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
-<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-<script src="../../../_static/jquery.js"></script>
-<script src="../../../_static/underscore.js"></script>
-<script src="../../../_static/doctools.js"></script>
+<link as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+<script src="../../../_static/doctools.js?v=9bcbadda"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 <script>let toggleHintShow = 'Click to show';</script>
 <script>let toggleHintHide = 'Click to hide';</script>
 <script>let toggleOpenOnPrint = 'true';</script>
-<script src="../../../_static/togglebutton.js"></script>
-<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
 <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-<link href="../../genindex.html" rel="index" title="Index">
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>DOCUMENTATION_OPTIONS.pagename = '_modules/transcribe/transcribe';</script>
+<link href="../../genindex.html" rel="index" title="Index"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="en" name="docsearch:language"/>
-<!-- Google Analytics -->
-</link></link></link></link></link></link></head>
-<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
-<!-- Checkboxes to toggle the left sidebar -->
-<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
-<label class="overlay overlay-navbar" for="__navigation">
-<div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
-<label class="overlay overlay-pagetoc" for="__page-toc">
-<div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-<div class="container-fluid" id="banner"></div>
-<div class="container-xl">
-<div class="row">
-<!-- Sidebar -->
-<div class="bd-sidebar noprint single-page" id="site-navigation">
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="light" data-offset="180">
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<input class="sidebar-toggle" id="pst-primary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+<input class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="" autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="" spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
 </div>
-<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
+</div>
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<a class="navbar-brand logo" href="../../index.html">
+<p class="title logo__title"></p>
+</a></div>
+<div class="sidebar-primary-item">
+<script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content" role="main">
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-<div class="header-article row sticky-top noprint">
-<div class="col py-1 d-flex header-article-main">
-<div class="header-article__left">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
+</button></div>
 </div>
-<div class="header-article__right">
+<div class="header-article-items__end">
+<div class="header-article-item">
+<div class="article-header-buttons">
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+</div></div>
 </div>
 </div>
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
 </div>
-</div>
-<div class="article row">
-<div class="col pl-md-3 pl-lg-5 content-container">
-<!-- Table of contents that is only displayed when printing the page -->
 <div class="onlyprint" id="jb-print-docs-body">
 <h1></h1>
 <!-- Table of contents -->
@@ -82,8 +137,8 @@
 </div>
 </div>
 </div>
-<main id="main-content" role="main">
-<div>
+<div id="searchbox"></div>
+<article class="bd-article">
 <h1>Source code for transcribe.transcribe</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Copyright 2024 Iguazio</span>
 <span class="c1">#</span>
@@ -119,7 +174,9 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_flash_attn_2_available</span>
 
 
-<div class="viewcode-block" id="BaseTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BaseTask</span><span class="p">:</span>
+<div class="viewcode-block" id="BaseTask">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseTask</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A task to write the transcription to file.</span>
 <span class="sd">    """</span>
@@ -142,7 +199,9 @@
         <span class="c1"># Prepare the error variable:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="BaseTask.do_task"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.do_task">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseTask.do_task">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.do_task">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Try to perform the task storing an error if occurred.</span>
 <span class="sd">        """</span>
@@ -154,7 +213,10 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseTask.is_failed"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.is_failed">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+<div class="viewcode-block" id="BaseTask.is_failed">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.is_failed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check if the task failed.</span>
 
@@ -162,7 +224,10 @@
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="BaseTask.get_result"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.get_result">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="BaseTask.get_result">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.get_result">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the result of the task. If the task failed, the error will be returned, otherwise, the result will be the</span>
 <span class="sd">        text file name.</span>
@@ -173,7 +238,10 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="o">.</span><span class="n">name</span></div>
 
-<div class="viewcode-block" id="BaseTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.to_tuple">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="BaseTask.to_tuple">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.to_tuple">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
 
@@ -184,6 +252,7 @@
             <span class="s2">"transcription_output"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">,</span>
             <span class="s2">"text_file"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="p">,</span>
         <span class="p">}</span></div>
+
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -206,7 +275,10 @@
             <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">[</span><span class="s2">"text"</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="SpeechDiarizationTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SpeechDiarizationTask">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A task to write the transcription to file with respect to a given speech diarization.</span>
 <span class="sd">    """</span>
@@ -253,7 +325,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SpeechDiarizationTask</span><span class="o">.</span><span class="n">_DiarizationSegment</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">=</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="SpeechDiarizationTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask.to_tuple">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<div class="viewcode-block" id="SpeechDiarizationTask.to_tuple">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask.to_tuple">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
 
@@ -264,6 +338,7 @@
             <span class="o">**</span><span class="n">task_kwargs</span><span class="p">,</span>
             <span class="s2">"speech_diarization"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span><span class="p">,</span>
         <span class="p">}</span></div>
+
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -396,7 +471,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">=</span> <span class="n">closest_segment_index</span></div>
 
 
-<div class="viewcode-block" id="SpeechDiarizationPerChannelTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationPerChannelTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationPerChannelTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A task to write the transcription to file with respect to a given speech diarization per channel.</span>
 <span class="sd">    """</span>
@@ -432,7 +510,9 @@
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output_channels</span>
 
-<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.do_task"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.do_task">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.do_task">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.do_task">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Try to perform the task storing an error if occurred.</span>
 <span class="sd">        """</span>
@@ -442,7 +522,10 @@
                 <span class="k">return</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do_task</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.to_tuple">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.to_tuple">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.to_tuple">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
 
@@ -451,6 +534,7 @@
         <span class="n">task_class</span><span class="p">,</span> <span class="n">task_kwargs</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">to_tuple</span><span class="p">()</span>
         <span class="n">task_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"transcription_output"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">task_class</span><span class="p">,</span> <span class="n">task_kwargs</span></div>
+
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -492,7 +576,10 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_do_task</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="BatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BatchProcessor</span><span class="p">:</span>
+
+<div class="viewcode-block" id="BatchProcessor">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BatchProcessor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A batch processor to process batches of transcriptions. The batch processor is creating tasks and is aimed to be</span>
 <span class="sd">    working along the transcriber. It can be used with multiprocessing queue or run the tasks directly using the</span>
@@ -515,7 +602,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="BatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.process_batch">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
+<div class="viewcode-block" id="BatchProcessor.process_batch">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.process_batch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
 <span class="sd">        processor.</span>
@@ -537,7 +626,10 @@
             <span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="BatchProcessor.get_tasks"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_tasks">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="BatchProcessor.get_tasks">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_tasks">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the tasks to perform.</span>
 
@@ -547,7 +639,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">return</span> <span class="n">tasks</span></div>
 
-<div class="viewcode-block" id="BatchProcessor.do_tasks"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.do_tasks">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="BatchProcessor.do_tasks">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.do_tasks">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">do_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Perform the tasks. Should be used if no multiprocessing queue is given to a transcriber.</span>
 <span class="sd">        """</span>
@@ -555,7 +650,10 @@
             <span class="n">task</span><span class="o">.</span><span class="n">do_task</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">task</span><span class="o">.</span><span class="n">is_failed</span><span class="p">(),</span> <span class="n">task</span><span class="o">.</span><span class="n">get_result</span><span class="p">()))</span></div>
 
-<div class="viewcode-block" id="BatchProcessor.get_results"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_results">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+
+<div class="viewcode-block" id="BatchProcessor.get_results">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_results">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get the results of the tasks. The stored results are then cleared.</span>
 
@@ -564,6 +662,7 @@
         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">return</span> <span class="n">results</span></div>
+
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_current_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -583,7 +682,10 @@
         <span class="k">return</span> <span class="n">current_files</span></div>
 
 
-<div class="viewcode-block" id="SpeechDiarizationBatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SpeechDiarizationBatchProcessor">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A batch processor to process batches of transcriptions with respect to a given speech diarization. The batch</span>
 <span class="sd">    processor is creating tasks and is aimed to be working along the transcriber. It can be used with multiprocessing</span>
@@ -604,7 +706,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span> <span class="o">=</span> <span class="n">speech_diarization</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span> <span class="o">=</span> <span class="n">audio_files</span>
 
-<div class="viewcode-block" id="SpeechDiarizationBatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor.process_batch">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
+<div class="viewcode-block" id="SpeechDiarizationBatchProcessor.process_batch">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor.process_batch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
 <span class="sd">        processor.</span>
@@ -625,10 +729,14 @@
                 <span class="p">)</span>
                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">current_files</span><span class="p">)</span>
             <span class="p">]</span>
-        <span class="p">)</span></div></div>
+        <span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">PerChannelSpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PerChannelSpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A batch processor to process batches of transcriptions per channel. The batch processor is creating tasks with the</span>
 <span class="sd">    selected amount of channels given and is aimed to be working along the transcriber. It can be used with</span>
@@ -659,7 +767,9 @@
         <span class="c1"># Prepare a channel buffer to store the channels until the current task created is fully covered:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="p">:</span> <span class="n">SpeechDiarizationPerChannelTask</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor.process_batch">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
+<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor.process_batch">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor.process_batch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
 <span class="sd">        processor.</span>
@@ -692,10 +802,14 @@
                 <span class="c1"># Collect the task and reset the task in process:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span> <span class="o">=</span> <span class="kc">None</span></div></div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
 
 
-<div class="viewcode-block" id="Transcriber"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Transcriber</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Transcriber">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Transcriber</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A transcription wrapper for the Huggingface's ASR pipeline -</span>
 <span class="sd">    https://huggingface.co/transformers/main_classes/pipelines.html#transformers.AutomaticSpeechRecognitionPipeline to</span>
@@ -779,7 +893,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_pipeline</span><span class="p">:</span> <span class="n">AutomaticSpeechRecognitionPipeline</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_generate_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="Transcriber.load"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.load">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Transcriber.load">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.load">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Load the transcriber. Must be called before transcribing.</span>
 <span class="sd">        """</span>
@@ -866,7 +982,10 @@
             <span class="n">assistant_model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_generate_kwargs</span><span class="p">[</span><span class="s2">"assistant_model"</span><span class="p">]</span> <span class="o">=</span> <span class="n">assistant_model</span></div>
 
-<div class="viewcode-block" id="Transcriber.transcribe"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.transcribe">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">transcribe</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Transcriber.transcribe">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.transcribe">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transcribe</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
         <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -961,7 +1080,9 @@
         <span class="k">if</span> <span class="n">batches_queue</span><span class="p">:</span>
             <span class="n">batches_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">outputs</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">batch_processor</span> <span class="k">else</span> <span class="kc">None</span></div></div>
+        <span class="k">return</span> <span class="n">outputs</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">batch_processor</span> <span class="k">else</span> <span class="kc">None</span></div>
+</div>
+
 
 
 <span class="c1">#: The value to send into multiprocessing queues to stop the process:</span>
@@ -1041,7 +1162,9 @@
 <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.open_mpi_handler">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">open_mpi_handler</span><span class="p">(</span>
+<div class="viewcode-block" id="open_mpi_handler">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.open_mpi_handler">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">open_mpi_handler</span><span class="p">(</span>
     <span class="n">worker_inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
     <span class="k">global</span> <span class="n">_LOGGER</span>
@@ -1153,6 +1276,7 @@
     <span class="k">return</span> <span class="n">decorator</span></div>
 
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">_check_mlrun_and_open_mpi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">"mlrun.MLClientCtx"</span><span class="p">,</span> <span class="s2">"mpi4py.MPI.Intracomm"</span><span class="p">]:</span>
     <span class="n">is_mpi</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">try</span><span class="p">:</span>
@@ -1180,7 +1304,9 @@
     <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="transcribe"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.transcribe">[docs]</a><span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<div class="viewcode-block" id="transcribe">
+<a class="viewcode-back" href="documentation.html#transcribe.transcribe.transcribe">[docs]</a>
+<span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">transcribe</span><span class="p">(</span>
     <span class="c1"># Input / Output kwargs:</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span>
@@ -1400,6 +1526,7 @@
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_directory</span><span class="p">),</span> <span class="n">successes</span><span class="p">,</span> <span class="n">errors</span></div>
 
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">_get_audio_files</span><span class="p">(</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
@@ -1550,26 +1677,32 @@
 
     <span class="k">return</span> <span class="n">results</span>
 </pre></div>
-</div>
-</main>
-<footer class="footer-article noprint">
-<!-- Previous / next buttons -->
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
 </div>
 </footer>
 </div>
 </div>
-<div class="footer-content row">
-<footer class="col footer"><p>
-  
-      © Copyright .<br/>
-</p>
+<footer class="bd-footer-content">
+<div class="bd-footer-content__inner container">
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
 </footer>
-</div>
-</div>
+</main>
 </div>
 </div>
 <!-- Scripts loaded after <body> so the DOM is not blocked -->
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+<footer class="bd-footer">
+</footer>
 </body>
 </html>
