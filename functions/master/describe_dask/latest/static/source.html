@@ -28,62 +28,158 @@
 <body style="background-color:darkgray; margin: 0 0 0 0;">
     <pre style="margin: 0 1em;">
         <code class="python">
-verbose: false
-spec:
-  disable_auto_mount: false
-  image: mlrun/ml-models
-  command: ''
-  default_handler: summarize
-  entry_points:
-    summarize:
-      outputs:
-      - type: None
-      has_kwargs: false
-      name: summarize
-      has_varargs: false
-      lineno: 28
-      parameters:
-      - name: context
-        doc: the function context
-      - name: dask_key
-        type: str
-        doc: key of dataframe in dask client "datasets" attribute
-        default: dask_key
-      - name: dataset
-        type: DataItem
-        default: null
-      - name: label_column
-        type: str
-        doc: ground truth column label
-        default: label
-      - name: plots_dest
-        type: str
-        doc: destination folder of summary plots (relative to artifact_path)
-        default: plots
-      - name: dask_function
-        type: str
-        doc: dask function url (db://..)
-        default: null
-      - name: dask_client
-        doc: dask client object
-        default: null
-      doc: 'Summarize a table
+# Copyright 2019 Iguazio
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+import mlrun
+import warnings
+warnings.simplefilter(action="ignore", category=FutureWarning)
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from mlrun.artifacts import PlotArtifact, TableArtifact
+from mlrun.mlutils.plots import gcf_clear
+import numpy as np
 
 
-        Connects to dask client through the function context, or through an optional
+pd.set_option("display.float_format", lambda x: "%.2f" % x)
 
-        user-supplied scheduler.'
-  build:
-    code_origin: ''
-    origin_filename: ''
-    functionSourceCode: IyBDb3B5cmlnaHQgMjAxOSBJZ3VhemlvCiMKIyBMaWNlbnNlZCB1bmRlciB0aGUgQXBhY2hlIExpY2Vuc2UsIFZlcnNpb24gMi4wICh0aGUgIkxpY2Vuc2UiKTsKIyB5b3UgbWF5IG5vdCB1c2UgdGhpcyBmaWxlIGV4Y2VwdCBpbiBjb21wbGlhbmNlIHdpdGggdGhlIExpY2Vuc2UuCiMgWW91IG1heSBvYnRhaW4gYSBjb3B5IG9mIHRoZSBMaWNlbnNlIGF0CiMKIyAgICAgaHR0cDovL3d3dy5hcGFjaGUub3JnL2xpY2Vuc2VzL0xJQ0VOU0UtMi4wCiMKIyBVbmxlc3MgcmVxdWlyZWQgYnkgYXBwbGljYWJsZSBsYXcgb3IgYWdyZWVkIHRvIGluIHdyaXRpbmcsIHNvZnR3YXJlCiMgZGlzdHJpYnV0ZWQgdW5kZXIgdGhlIExpY2Vuc2UgaXMgZGlzdHJpYnV0ZWQgb24gYW4gIkFTIElTIiBCQVNJUywKIyBXSVRIT1VUIFdBUlJBTlRJRVMgT1IgQ09ORElUSU9OUyBPRiBBTlkgS0lORCwgZWl0aGVyIGV4cHJlc3Mgb3IgaW1wbGllZC4KIyBTZWUgdGhlIExpY2Vuc2UgZm9yIHRoZSBzcGVjaWZpYyBsYW5ndWFnZSBnb3Zlcm5pbmcgcGVybWlzc2lvbnMgYW5kCiMgbGltaXRhdGlvbnMgdW5kZXIgdGhlIExpY2Vuc2UuCiMKaW1wb3J0IG1scnVuCmltcG9ydCB3YXJuaW5ncwp3YXJuaW5ncy5zaW1wbGVmaWx0ZXIoYWN0aW9uPSJpZ25vcmUiLCBjYXRlZ29yeT1GdXR1cmVXYXJuaW5nKQppbXBvcnQgcGFuZGFzIGFzIHBkCmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHQKaW1wb3J0IHNlYWJvcm4gYXMgc25zCmZyb20gbWxydW4uYXJ0aWZhY3RzIGltcG9ydCBQbG90QXJ0aWZhY3QsIFRhYmxlQXJ0aWZhY3QKZnJvbSBtbHJ1bi5tbHV0aWxzLnBsb3RzIGltcG9ydCBnY2ZfY2xlYXIKaW1wb3J0IG51bXB5IGFzIG5wCgoKcGQuc2V0X29wdGlvbigiZGlzcGxheS5mbG9hdF9mb3JtYXQiLCBsYW1iZGEgeDogIiUuMmYiICUgeCkKCmRlZiBzdW1tYXJpemUoCiAgICBjb250ZXh0LAogICAgZGFza19rZXk6IHN0ciA9ICJkYXNrX2tleSIsCiAgICBkYXRhc2V0OiBtbHJ1bi5EYXRhSXRlbSA9IE5vbmUsCiAgICBsYWJlbF9jb2x1bW46IHN0ciA9ICJsYWJlbCIsCiAgICBwbG90c19kZXN0OiBzdHIgPSAicGxvdHMiLAogICAgZGFza19mdW5jdGlvbjogc3RyID0gTm9uZSwKICAgIGRhc2tfY2xpZW50PU5vbmUsCikgLT4gTm9uZToKICAgICIiIlN1bW1hcml6ZSBhIHRhYmxlCiAgICAKICAgIENvbm5lY3RzIHRvIGRhc2sgY2xpZW50IHRocm91Z2ggdGhlIGZ1bmN0aW9uIGNvbnRleHQsIG9yIHRocm91Z2ggYW4gb3B0aW9uYWwKICAgIHVzZXItc3VwcGxpZWQgc2NoZWR1bGVyLgoKICAgIDpwYXJhbSBjb250ZXh0OiAgICAgICAgIHRoZSBmdW5jdGlvbiBjb250ZXh0CiAgICA6cGFyYW0gZGFza19rZXk6ICAgICAgICBrZXkgb2YgZGF0YWZyYW1lIGluIGRhc2sgY2xpZW50ICJkYXRhc2V0cyIgYXR0cmlidXRlCiAgICA6cGFyYW0gbGFiZWxfY29sdW1uOiAgICBncm91bmQgdHJ1dGggY29sdW1uIGxhYmVsCiAgICA6cGFyYW0gcGxvdHNfZGVzdDogICAgICBkZXN0aW5hdGlvbiBmb2xkZXIgb2Ygc3VtbWFyeSBwbG90cyAocmVsYXRpdmUgdG8gYXJ0aWZhY3RfcGF0aCkKICAgIDpwYXJhbSBkYXNrX2Z1bmN0aW9uOiAgIGRhc2sgZnVuY3Rpb24gdXJsIChkYjovLy4uKQogICAgOnBhcmFtIGRhc2tfY2xpZW50OiAgICAgZGFzayBjbGllbnQgb2JqZWN0CiAgICAiIiIKICAgIGlmIGRhc2tfZnVuY3Rpb246CiAgICAgICAgY2xpZW50ID0gbWxydW4uaW1wb3J0X2Z1bmN0aW9uKGRhc2tfZnVuY3Rpb24pLmNsaWVudAogICAgZWxpZiBkYXNrX2NsaWVudDoKICAgICAgICBjbGllbnQgPSBkYXNrX2NsaWVudAogICAgZWxzZToKICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCdkYXNrIGNsaWVudCB3YXMgbm90IHByb3ZpZGVkJykKICAgICAgICAKICAgIGlmIGRhc2tfa2V5IGluIGNsaWVudC5kYXRhc2V0czoKICAgICAgICB0YWJsZSA9IGNsaWVudC5nZXRfZGF0YXNldChkYXNrX2tleSkKICAgIGVsaWYgZGF0YXNldDoKICAgICAgICAjdGFibGUgPSBkYXRhc2V0LmFzX2RmKGRmX21vZHVsZT1kZCkKICAgICAgICB0YWJsZSA9IGRhdGFzZXQuYXNfZGYoKQogICAgZWxzZToKICAgICAgICBjb250ZXh0LmxvZ2dlci5pbmZvKGYib25seSB0aGVzZSBkYXRhc2V0cyBhcmUgYXZhaWxhYmxlIHtjbGllbnQuZGF0YXNldHN9IGluIGNsaWVudCB7Y2xpZW50fSIpCiAgICAgICAgcmFpc2UgRXhjZXB0aW9uKCJkYXRhc2V0IG5vdCBmb3VuZCBvbiBkYXNrIGNsdXN0ZXIiKQogICAgZGYgPSB0YWJsZQogICAgaGVhZGVyID0gZGYuY29sdW1ucy52YWx1ZXMKICAgIGV4dHJhX2RhdGEgPSB7fQoKICAgIHRyeToKICAgICAgICBnY2ZfY2xlYXIocGx0KQogICAgICAgIHNuc3BsdCA9IHNucy5wYWlycGxvdChkZiwgaHVlPWxhYmVsX2NvbHVtbikgICMgLCBkaWFnX2t3cz17ImJ3IjogMS41fSkKICAgICAgICBleHRyYV9kYXRhWyJoaXN0b2dyYW1zIl0gPSBjb250ZXh0LmxvZ19hcnRpZmFjdCgKICAgICAgICAgICAgUGxvdEFydGlmYWN0KCJoaXN0b2dyYW1zIiwgYm9keT1wbHQuZ2NmKCkpLAogICAgICAgICAgICBsb2NhbF9wYXRoPWYie3Bsb3RzX2Rlc3R9L2hpc3QuaHRtbCIsCiAgICAgICAgICAgIGRiX2tleT1GYWxzZSwKICAgICAgICApCiAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgY29udGV4dC5sb2dnZXIuZXJyb3IoZiJGYWlsZWQgdG8gY3JlYXRlIHBhaXJwbG90IGhpc3RvZ3JhbXMgZHVlIHRvOiB7ZX0iKQoKICAgIHRyeToKICAgICAgICBnY2ZfY2xlYXIocGx0KQogICAgICAgIHBsb3RfY29scyA9IDMKICAgICAgICBwbG90X3Jvd3MgPSBpbnQoKGxlbihoZWFkZXIpIC0gMSkgLyBwbG90X2NvbHMpICsgMQogICAgICAgIGZpZywgYXggPSBwbHQuc3VicGxvdHMocGxvdF9yb3dzLCBwbG90X2NvbHMsIGZpZ3NpemU9KDE1LCA0KSkKICAgICAgICBmaWcudGlnaHRfbGF5b3V0KHBhZD0yLjApCiAgICAgICAgZm9yIGkgaW4gcmFuZ2UocGxvdF9yb3dzICogcGxvdF9jb2xzKToKICAgICAgICAgICAgaWYgaSA8IGxlbihoZWFkZXIpOgogICAgICAgICAgICAgICAgc25zLnZpb2xpbnBsb3QoCiAgICAgICAgICAgICAgICAgICAgeD1kZltoZWFkZXJbaV1dLAogICAgICAgICAgICAgICAgICAgIGF4PWF4W2ludChpIC8gcGxvdF9jb2xzKV1baSAlIHBsb3RfY29sc10sCiAgICAgICAgICAgICAgICAgICAgb3JpZW50PSJoIiwKICAgICAgICAgICAgICAgICAgICB3aWR0aD0wLjcsCiAgICAgICAgICAgICAgICAgICAgaW5uZXI9InF1YXJ0aWxlIiwKICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgZWxzZToKICAgICAgICAgICAgICAgIGZpZy5kZWxheGVzKGF4W2ludChpIC8gcGxvdF9jb2xzKV1baSAlIHBsb3RfY29sc10pCiAgICAgICAgICAgIGkgKz0gMQogICAgICAgIGV4dHJhX2RhdGFbInZpb2xpbiJdID0gY29udGV4dC5sb2dfYXJ0aWZhY3QoCiAgICAgICAgICAgIFBsb3RBcnRpZmFjdCgidmlvbGluIiwgYm9keT1wbHQuZ2NmKCksIHRpdGxlPSJWaW9saW4gUGxvdCIpLAogICAgICAgICAgICBsb2NhbF9wYXRoPWYie3Bsb3RzX2Rlc3R9L3Zpb2xpbi5odG1sIiwKICAgICAgICAgICAgZGJfa2V5PUZhbHNlLAogICAgICAgICkKICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICBjb250ZXh0LmxvZ2dlci53YXJuKGYiRmFpbGVkIHRvIGNyZWF0ZSB2aW9saW4gZGlzdHJpYnV0aW9uIHBsb3RzIGR1ZSB0bzoge2V9IikKCiAgICBpZiBsYWJlbF9jb2x1bW46CiAgICAgICAgbGFiZWxzID0gZGYucG9wKGxhYmVsX2NvbHVtbikKICAgICAgICBpbWJ0YWJsZSA9IGxhYmVscy52YWx1ZV9jb3VudHMobm9ybWFsaXplPVRydWUpLnNvcnRfaW5kZXgoKQogICAgICAgIHRyeToKICAgICAgICAgICAgZ2NmX2NsZWFyKHBsdCkKICAgICAgICAgICAgYmFsYW5jZWJhciA9IGltYnRhYmxlLnBsb3Qoa2luZD0iYmFyIiwgdGl0bGU9ImNsYXNzIGltYmFsYW5jZSAtIGxhYmVscyIpCiAgICAgICAgICAgIGJhbGFuY2ViYXIuc2V0X3hsYWJlbCgiY2xhc3MiKQogICAgICAgICAgICBiYWxhbmNlYmFyLnNldF95bGFiZWwoInByb3BvcnRpb24gb2YgdG90YWwiKQogICAgICAgICAgICBleHRyYV9kYXRhWyJpbWJhbGFuY2UiXSA9IGNvbnRleHQubG9nX2FydGlmYWN0KAogICAgICAgICAgICAgICAgUGxvdEFydGlmYWN0KCJpbWJhbGFuY2UiLCBib2R5PXBsdC5nY2YoKSksCiAgICAgICAgICAgICAgICBsb2NhbF9wYXRoPWYie3Bsb3RzX2Rlc3R9L2ltYmFsYW5jZS5odG1sIiwKICAgICAgICAgICAgKQogICAgICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICAgICAgY29udGV4dC5sb2dnZXIud2FybihmIkZhaWxlZCB0byBjcmVhdGUgY2xhc3MgaW1iYWxhbmNlIHBsb3QgZHVlIHRvOiB7ZX0iKQogICAgICAgIGNvbnRleHQubG9nX2FydGlmYWN0KAogICAgICAgICAgICBUYWJsZUFydGlmYWN0KAogICAgICAgICAgICAgICAgImltYmFsYW5jZS13ZWlnaHRzLXZlYyIsIGRmPXBkLkRhdGFGcmFtZSh7IndlaWdodHMiOiBpbWJ0YWJsZX0pCiAgICAgICAgICAgICksCiAgICAgICAgICAgIGxvY2FsX3BhdGg9ZiJ7cGxvdHNfZGVzdH0vaW1iYWxhbmNlLXdlaWdodHMtdmVjLmNzdiIsCiAgICAgICAgICAgIGRiX2tleT1GYWxzZSwKICAgICAgICApCgogICAgdGJsY29yciA9IGRmLmNvcnIoKQogICAgbWFzayA9IG5wLnplcm9zX2xpa2UodGJsY29yciwgZHR5cGU9bnAuYm9vbCkKICAgIG1hc2tbbnAudHJpdV9pbmRpY2VzX2Zyb20obWFzayldID0gVHJ1ZQoKICAgIGRmY29yciA9IHBkLkRhdGFGcmFtZShkYXRhPXRibGNvcnIsIGNvbHVtbnM9aGVhZGVyLCBpbmRleD1oZWFkZXIpCiAgICBkZmNvcnIgPSBkZmNvcnJbbnAuYXJhbmdlKGRmY29yci5zaGFwZVswXSlbOiwgTm9uZV0gPiBucC5hcmFuZ2UoZGZjb3JyLnNoYXBlWzFdKV0KICAgIGNvbnRleHQubG9nX2FydGlmYWN0KAogICAgICAgIFRhYmxlQXJ0aWZhY3QoImNvcnJlbGF0aW9uLW1hdHJpeCIsIGRmPXRibGNvcnIsIHZpc2libGU9VHJ1ZSksCiAgICAgICAgbG9jYWxfcGF0aD1mIntwbG90c19kZXN0fS9jb3JyZWxhdGlvbi1tYXRyaXguY3N2IiwKICAgICAgICBkYl9rZXk9RmFsc2UsCiAgICApCgogICAgdHJ5OgogICAgICAgIGdjZl9jbGVhcihwbHQpCiAgICAgICAgYXggPSBwbHQuYXhlcygpCiAgICAgICAgc25zLmhlYXRtYXAodGJsY29yciwgYXg9YXgsIG1hc2s9bWFzaywgYW5ub3Q9RmFsc2UsIGNtYXA9cGx0LmNtLlJlZHMpCiAgICAgICAgYXguc2V0X3RpdGxlKCJmZWF0dXJlcyBjb3JyZWxhdGlvbiIpCiAgICAgICAgZXh0cmFfZGF0YVsiY29ycmVsYXRpb24iXSA9IGNvbnRleHQubG9nX2FydGlmYWN0KAogICAgICAgICAgICBQbG90QXJ0aWZhY3QoImNvcnJlbGF0aW9uIiwgYm9keT1wbHQuZ2NmKCksIHRpdGxlPSJDb3JyZWxhdGlvbiBNYXRyaXgiKSwKICAgICAgICAgICAgbG9jYWxfcGF0aD1mIntwbG90c19kZXN0fS9jb3JyLmh0bWwiLAogICAgICAgICAgICBkYl9rZXk9RmFsc2UsCiAgICAgICAgKQogICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgIGNvbnRleHQubG9nZ2VyLndhcm4oZiJGYWlsZWQgdG8gY3JlYXRlIGZlYXR1cmVzIGNvcnJlbGF0aW9uIHBsb3QgZHVlIHRvOiB7ZX0iKQoKICAgIGdjZl9jbGVhcihwbHQpCg==
-  description: describe and visualizes dataset stats
-metadata:
-  categories:
-  - data-analysis
-  tag: ''
-  name: describe-dask
-kind: job
+def summarize(
+    context,
+    dask_key: str = "dask_key",
+    dataset: mlrun.DataItem = None,
+    label_column: str = "label",
+    plots_dest: str = "plots",
+    dask_function: str = None,
+    dask_client=None,
+) -> None:
+    """Summarize a table
+    
+    Connects to dask client through the function context, or through an optional
+    user-supplied scheduler.
+
+    :param context:         the function context
+    :param dask_key:        key of dataframe in dask client "datasets" attribute
+    :param label_column:    ground truth column label
+    :param plots_dest:      destination folder of summary plots (relative to artifact_path)
+    :param dask_function:   dask function url (db://..)
+    :param dask_client:     dask client object
+    """
+    if dask_function:
+        client = mlrun.import_function(dask_function).client
+    elif dask_client:
+        client = dask_client
+    else:
+        raise ValueError('dask client was not provided')
+        
+    if dask_key in client.datasets:
+        table = client.get_dataset(dask_key)
+    elif dataset:
+        #table = dataset.as_df(df_module=dd)
+        table = dataset.as_df()
+    else:
+        context.logger.info(f"only these datasets are available {client.datasets} in client {client}")
+        raise Exception("dataset not found on dask cluster")
+    df = table
+    header = df.columns.values
+    extra_data = {}
+
+    try:
+        gcf_clear(plt)
+        snsplt = sns.pairplot(df, hue=label_column)  # , diag_kws={"bw": 1.5})
+        extra_data["histograms"] = context.log_artifact(
+            PlotArtifact("histograms", body=plt.gcf()),
+            local_path=f"{plots_dest}/hist.html",
+            db_key=False,
+        )
+    except Exception as e:
+        context.logger.error(f"Failed to create pairplot histograms due to: {e}")
+
+    try:
+        gcf_clear(plt)
+        plot_cols = 3
+        plot_rows = int((len(header) - 1) / plot_cols) + 1
+        fig, ax = plt.subplots(plot_rows, plot_cols, figsize=(15, 4))
+        fig.tight_layout(pad=2.0)
+        for i in range(plot_rows * plot_cols):
+            if i < len(header):
+                sns.violinplot(
+                    x=df[header[i]],
+                    ax=ax[int(i / plot_cols)][i % plot_cols],
+                    orient="h",
+                    width=0.7,
+                    inner="quartile",
+                )
+            else:
+                fig.delaxes(ax[int(i / plot_cols)][i % plot_cols])
+            i += 1
+        extra_data["violin"] = context.log_artifact(
+            PlotArtifact("violin", body=plt.gcf(), title="Violin Plot"),
+            local_path=f"{plots_dest}/violin.html",
+            db_key=False,
+        )
+    except Exception as e:
+        context.logger.warn(f"Failed to create violin distribution plots due to: {e}")
+
+    if label_column:
+        labels = df.pop(label_column)
+        imbtable = labels.value_counts(normalize=True).sort_index()
+        try:
+            gcf_clear(plt)
+            balancebar = imbtable.plot(kind="bar", title="class imbalance - labels")
+            balancebar.set_xlabel("class")
+            balancebar.set_ylabel("proportion of total")
+            extra_data["imbalance"] = context.log_artifact(
+                PlotArtifact("imbalance", body=plt.gcf()),
+                local_path=f"{plots_dest}/imbalance.html",
+            )
+        except Exception as e:
+            context.logger.warn(f"Failed to create class imbalance plot due to: {e}")
+        context.log_artifact(
+            TableArtifact(
+                "imbalance-weights-vec", df=pd.DataFrame({"weights": imbtable})
+            ),
+            local_path=f"{plots_dest}/imbalance-weights-vec.csv",
+            db_key=False,
+        )
+
+    tblcorr = df.corr()
+    mask = np.zeros_like(tblcorr, dtype=np.bool)
+    mask[np.triu_indices_from(mask)] = True
+
+    dfcorr = pd.DataFrame(data=tblcorr, columns=header, index=header)
+    dfcorr = dfcorr[np.arange(dfcorr.shape[0])[:, None] > np.arange(dfcorr.shape[1])]
+    context.log_artifact(
+        TableArtifact("correlation-matrix", df=tblcorr, visible=True),
+        local_path=f"{plots_dest}/correlation-matrix.csv",
+        db_key=False,
+    )
+
+    try:
+        gcf_clear(plt)
+        ax = plt.axes()
+        sns.heatmap(tblcorr, ax=ax, mask=mask, annot=False, cmap=plt.cm.Reds)
+        ax.set_title("features correlation")
+        extra_data["correlation"] = context.log_artifact(
+            PlotArtifact("correlation", body=plt.gcf(), title="Correlation Matrix"),
+            local_path=f"{plots_dest}/corr.html",
+            db_key=False,
+        )
+    except Exception as e:
+        context.logger.warn(f"Failed to create features correlation plot due to: {e}")
+
+    gcf_clear(plt)
 
         </code>
     </pre>
