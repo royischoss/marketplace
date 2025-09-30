@@ -1,1 +1,1 @@
-{"kind": ["generic", "monitoring_application"], "categories": ["model-serving"]}
+{"categories": ["model-serving"], "kind": ["monitoring_application"]}
