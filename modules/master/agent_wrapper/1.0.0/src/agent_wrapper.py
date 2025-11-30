@@ -1,0 +1,80 @@
+# Copyright 2024 Iguazio
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+from mlrun import get_or_create_project, code_to_function, mlconf
+from mlrun.serving import ModelRunnerStep
+from mlrun.datastore.datastore_profile import DatastoreProfileV3io
+
+class AgentDeployer:
+    def __init__(
+            self,
+            project_name: str,
+            agent_name: str,
+            model_class_name: str,
+            function: str,
+            model_params: dict = None,
+            result_path: str = None,
+            inputs_path: str = None,
+            requirements: list[str] = None,
+            image: str = "",
+    ):
+        self._project = None
+        self.project_name = project_name
+        self.agent_name = agent_name
+        self.model_class_name = model_class_name
+        self.function = function
+        self.requirements = requirements or []
+        self.model_params = model_params or {}
+        self.result_path = result_path
+        self.inputs_path = inputs_path
+        self.image = image or "mlrun/mlrun"
+        self.configure_model_monitoring()
+
+    def configure_model_monitoring(self):
+        tsdb_profile = DatastoreProfileV3io(
+            name="v3io-tsdb-profile",
+            v3io_access_key=mlconf.get_v3io_access_key(),
+        )
+        self.project.register_datastore_profile(tsdb_profile)
+        self.project.enable_model_monitoring(base_period=10, image=self.image)
+
+    @property
+    def project(self):
+        if self._project:
+            return self._project
+        self._project = get_or_create_project(self.project_name, context="./")
+        return self._project
+
+    def get_function(self, enable_tracking: bool = True):
+        function = code_to_function(
+            name=f"{self.agent_name}_serving_function",
+            filename=self.function,
+            project=self.project_name,
+            kind="serving",
+            image=self.image,
+            requirements=self.requirements,
+        )
+        graph = function.set_topology(topology="flow", engine="async")
+        model_runner_step = ModelRunnerStep()
+        model_runner_step.add_model(
+            model_class=self.model_class_name,
+            endpoint_name=f'{self.agent_name}_model_endpoint',
+            result_path=self.result_path,
+            input_path=self.inputs_path,
+            execution_mechanism="naive",
+            **self.model_params
+        )
+        graph.to(model_runner_step)
+        function.set_tracking(enable_tracking=enable_tracking)
+        return function
