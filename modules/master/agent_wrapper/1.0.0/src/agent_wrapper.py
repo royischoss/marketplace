@@ -13,6 +13,7 @@
 # limitations under the License.
 from typing import Optional
 
+import mlrun.errors
 from mlrun import get_or_create_project, code_to_function, mlconf
 from mlrun.serving import ModelRunnerStep
 from mlrun.datastore.datastore_profile import DatastoreProfileV3io
@@ -62,7 +63,11 @@ class AgentDeployer:
             tsdb_profile_name=tsdb_profile.name,
             replace_creds=True,
         )
-        self.project.enable_model_monitoring(base_period=10, image=self.image)
+        try:
+            self.project.enable_model_monitoring(base_period=10, image=self.image)
+        except mlrun.errors.MLRunConflictError:
+            # Model monitoring is already enabled
+            pass
 
     @property
     def project(self):
