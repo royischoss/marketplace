@@ -14,4 +14,4 @@ spec:
     image: mlrun/mlrun
     kind: monitoring_application
     requirements:
-version: 1.0.0
+version: latest
