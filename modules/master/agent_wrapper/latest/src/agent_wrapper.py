@@ -48,7 +48,7 @@ class AgentDeployer:
         )
         stream_profile = DatastoreProfileV3io(
             name="v3io-stream-profile",
-            v3io_access_key=mlconf.mlconf.get_v3io_access_key(),
+            v3io_access_key=mlconf.get_v3io_access_key(),
         )
         self.project.set_model_monitoring_credentials(
             stream_profile_name=stream_profile.name,
