@@ -50,8 +50,10 @@ class AgentDeployer:
             name="v3io-stream-profile",
             v3io_access_key=mlconf.get_v3io_access_key(),
         )
+
         self.project.register_datastore_profile(tsdb_profile)
         self.project.register_datastore_profile(stream_profile)
+
         self.project.set_model_monitoring_credentials(
             stream_profile_name=stream_profile.name,
             tsdb_profile_name=tsdb_profile.name,
