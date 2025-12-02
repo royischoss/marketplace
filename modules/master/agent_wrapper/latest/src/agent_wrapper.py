@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from typing import Optional
 
 from mlrun import get_or_create_project, code_to_function, mlconf
 from mlrun.serving import ModelRunnerStep
@@ -23,11 +24,12 @@ class AgentDeployer:
             agent_name: str,
             model_class_name: str,
             function: str,
-            model_params: dict = None,
-            result_path: str = None,
-            inputs_path: str = None,
-            requirements: list[str] = None,
-            image: str = "",
+            model_params: Optional[dict] = None,
+            result_path: Optional[str] = None,
+            inputs_path: Optional[str] = None,
+            output_schema: Optional[list[str]] = None,
+            requirements: Optional[list[str]] = None,
+            image: Optional[str] = "mlrun/mlrun",
     ):
         self._project = None
         self.project_name = project_name
@@ -38,7 +40,8 @@ class AgentDeployer:
         self.model_params = model_params or {}
         self.result_path = result_path
         self.inputs_path = inputs_path
-        self.image = image or "mlrun/mlrun"
+        self.output_schema = output_schema
+        self.image = image
         self.configure_model_monitoring()
 
     def configure_model_monitoring(self):
@@ -81,9 +84,10 @@ class AgentDeployer:
         model_runner_step = ModelRunnerStep()
         model_runner_step.add_model(
             model_class=self.model_class_name,
-            endpoint_name=f'{self.agent_name}_model_endpoint',
+            endpoint_name=self.agent_name,
             result_path=self.result_path,
             input_path=self.inputs_path,
+            outputs=self.output_schema,
             execution_mechanism="naive",
             **self.model_params
         )
