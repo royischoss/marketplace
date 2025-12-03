@@ -97,6 +97,6 @@ class AgentDeployer:
             execution_mechanism="naive",
             **self.model_params
         )
-        graph.to(model_runner_step)
+        graph.to(model_runner_step).respond()
         function.set_tracking(enable_tracking=enable_tracking)
         return function
