@@ -66,7 +66,7 @@ class AgentDeployer:
         )
         try:
             self.project.enable_model_monitoring(base_period=10, image=self.image)
-        except (mlrun.errors.MLRunConflictError, mlrun.errors.HttpError) as e:
+        except (mlrun.errors.MLRunConflictError, mlrun.errors.MLRunHTTPError) as e:
             print(e)
             pass
 
