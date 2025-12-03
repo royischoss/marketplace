@@ -18,6 +18,7 @@ from mlrun import get_or_create_project, code_to_function, mlconf
 from mlrun.serving import ModelRunnerStep
 from mlrun.datastore.datastore_profile import DatastoreProfileV3io
 
+
 class AgentDeployer:
     def __init__(
             self,
@@ -65,8 +66,8 @@ class AgentDeployer:
         )
         try:
             self.project.enable_model_monitoring(base_period=10, image=self.image)
-        except mlrun.errors.MLRunConflictError:
-            # Model monitoring is already enabled
+        except (mlrun.errors.MLRunConflictError, mlrun.errors.HttpError) as e:
+            print(e)
             pass
 
     @property
