@@ -31,7 +31,7 @@ class AgentDeployer:
             output_schema: Optional[list[str]] = None,
             requirements: Optional[list[str]] = None,
             image: Optional[str] = "mlrun/mlrun",
-            set_model_monitoring: bool = False,
+            set_model_monitoring: Optional[bool] = False,
             **model_params
 
     ):
