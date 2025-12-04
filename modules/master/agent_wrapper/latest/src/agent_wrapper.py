@@ -12,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from typing import Optional
+import os
 
 import mlrun.errors
 from mlrun import get_current_project, code_to_function, mlconf
 from mlrun.serving import ModelRunnerStep
-from mlrun.datastore.datastore_profile import DatastoreProfileV3io
+from mlrun.datastore.datastore_profile import DatastoreProfileV3io,DatastoreProfileKafkaStream, DatastoreProfileTDEngine
 
 
 class AgentDeployer:
@@ -51,14 +52,30 @@ class AgentDeployer:
     def configure_model_monitoring(self):
         if not self.project:
             raise mlrun.errors.MLRunInvalidArgumentError("No current project found to set model monitoring")
-        tsdb_profile = DatastoreProfileV3io(
-            name="v3io-tsdb-profile",
-            v3io_access_key=mlconf.get_v3io_access_key(),
-        )
-        stream_profile = DatastoreProfileV3io(
-            name="v3io-stream-profile",
-            v3io_access_key=mlconf.get_v3io_access_key(),
-        )
+        if mlrun.mlconf.is_ce_mode():
+            mlrun_namespace = os.environ.get("MLRUN_NAMESPACE", "mlrun")
+            tsdb_profile = DatastoreProfileTDEngine(
+                name="tdengine-tsdb-profile",
+                user="root",
+                password="taosdata",
+                host=f"tdengine-tsdb.{mlrun_namespace}.svc.cluster.local",
+                port="6041",
+            )
+
+            stream_profile = DatastoreProfileKafkaStream(
+                name="kafka-stream-profile",
+                brokers=f"kafka-stream.{mlrun_namespace}.svc.cluster.local:9092",
+                topics=[],
+            )
+        else:
+            tsdb_profile = DatastoreProfileV3io(
+                name="v3io-tsdb-profile",
+                v3io_access_key=mlconf.get_v3io_access_key(),
+            )
+            stream_profile = DatastoreProfileV3io(
+                name="v3io-stream-profile",
+                v3io_access_key=mlconf.get_v3io_access_key(),
+            )
 
         self.project.register_datastore_profile(tsdb_profile)
         self.project.register_datastore_profile(stream_profile)
