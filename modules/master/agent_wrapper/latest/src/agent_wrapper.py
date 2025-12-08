@@ -140,7 +140,7 @@ class AgentDeployer:
             return self._project_name
         raise mlrun.errors.MLRunInvalidArgumentError("No current project found to get project name")
 
-    def get_function(self, set_tracking: bool) -> ServingRuntime:
+    def get_function(self, set_tracking: bool = True) -> ServingRuntime:
         """Get the serving function, loading it if necessary.
         :param set_tracking: Whether to enable tracking for the function.
         """
