@@ -161,7 +161,7 @@ class AgentDeployer:
 
     def _load_function(
             self) -> ServingRuntime:
-        self._function = code_to_function(
+        function = code_to_function(
             name=f"{self.agent_name}_serving_function",
             filename=self.function_file,
             project=self.project_name,
@@ -169,7 +169,7 @@ class AgentDeployer:
             image=self.image,
             requirements=self.requirements,
         )
-        graph = self._function.set_topology(topology="flow", engine="async")
+        graph = function.set_topology(topology="flow", engine="async")
         model_runner_step = ModelRunnerStep()
         model_runner_step.add_model(
             model_class=self.model_class_name,
@@ -181,4 +181,4 @@ class AgentDeployer:
             **self.model_params
         )
         graph.to(model_runner_step).respond()
-        return self._function
+        return function
