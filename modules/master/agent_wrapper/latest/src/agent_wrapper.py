@@ -141,14 +141,12 @@ class AgentDeployer:
         raise mlrun.errors.MLRunInvalidArgumentError("No current project found to get project name")
 
 
-    def get_function(self, enable_tracking:bool) -> ServingRuntime:
+    def get_function(self) -> ServingRuntime:
         """
         Get the serving function, loading it if necessary.
-        :param enable_tracking: Whether to enable tracking for the function.
         """
         if self._function is None:
             self._load_function()
-        self._function.set_tracking(enable_tracking)
         return self._function
 
 
@@ -158,7 +156,8 @@ class AgentDeployer:
         :param enable_tracking: Whether to enable tracking for the function.
         """
 
-        function = self.get_function(enable_tracking=enable_tracking)
+        function = self.get_function()
+        function.set_tracking(enable_tracking=enable_tracking)
         function.deploy()
         return function
 
