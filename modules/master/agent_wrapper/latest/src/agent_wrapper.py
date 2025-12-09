@@ -140,13 +140,11 @@ class AgentDeployer:
             return self._project_name
         raise mlrun.errors.MLRunInvalidArgumentError("No current project found to get project name")
 
-    def get_function(self, set_tracking: bool = True) -> ServingRuntime:
-        """Get the serving function, loading it if necessary.
-        :param set_tracking: Whether to enable tracking for the function.
-        """
+    @property
+    def function(self,) -> ServingRuntime:
+        """Get the serving function, loading it if necessary."""
         if self._function is None:
-            self._function = self._load_function()
-        self._function.set_tracking(enable_tracking=set_tracking)
+            self._load_function()
         return self._function
 
 
@@ -155,13 +153,15 @@ class AgentDeployer:
         Deploy the agent as a serving function in MLRun.
         :param enable_tracking: Whether to enable tracking for the function.
         """
-        function = self.get_function(set_tracking=enable_tracking)
-        function.deploy()
-        return function
+
+        self.function.set_tracking(enable_tracking)
+        self.function.deploy()
+        return self.function
 
     def _load_function(
-            self) -> ServingRuntime:
-        function = code_to_function(
+            self,
+    ) -> ServingRuntime:
+        self._function = code_to_function(
             name=f"{self.agent_name}_serving_function",
             filename=self.function_file,
             project=self.project_name,
@@ -169,7 +169,7 @@ class AgentDeployer:
             image=self.image,
             requirements=self.requirements,
         )
-        graph = function.set_topology(topology="flow", engine="async")
+        graph = self._function.set_topology(topology="flow", engine="async")
         model_runner_step = ModelRunnerStep()
         model_runner_step.add_model(
             model_class=self.model_class_name,
@@ -181,4 +181,4 @@ class AgentDeployer:
             **self.model_params
         )
         graph.to(model_runner_step).respond()
-        return function
+        return self._function
