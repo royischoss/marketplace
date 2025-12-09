@@ -153,8 +153,8 @@ class AgentDeployer:
         Deploy the agent as a serving function in MLRun.
         :param enable_tracking: Whether to enable tracking for the function.
         """
-
-        self.function.set_tracking(enable_tracking)
+        if enable_tracking:
+            self.function.set_tracking(enable_tracking)
         self.function.deploy()
         return self.function
 
