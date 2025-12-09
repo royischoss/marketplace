@@ -177,7 +177,7 @@ class AgentDeployer:
             result_path=self.result_path,
             input_path=self.inputs_path,
             outputs=self.output_schema,
-            execution_mechanism="naive",
+            execution_mechanism="asyncio",
             **self.model_params
         )
         graph.to(model_runner_step).respond()
